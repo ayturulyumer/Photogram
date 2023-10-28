@@ -7,7 +7,7 @@ export default function Header() {
                 <span className="headerTitleLarge">Capture, Share, Discover</span>
             </div>
             <div className="headerImg">
-                
+              
             </div>
     </div>
   )
