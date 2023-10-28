@@ -1,11 +1,14 @@
-import Header from "../../components/header/Header.jsx"
-import "./home.css"
+import Header from "../../components/header/Header.jsx";
+import Main from "../../components/main/main.jsx";
+import "./home.css";
 
 export default function Home() {
   return (
-    <div className="home">
-        <Header/>
-        homepage
-    </div>
-  )
+    <>
+      <Header />
+      <div className="home">
+        <Main />
+      </div>
+    </>
+  );
 }

@@ -1,0 +1,39 @@
+
+
+.mainTitles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainTitleLarge {
+  position: relative;
+  top: -8%;
+  font-size: 100px;
+  font-family: "Cinzel", serif;
+  color: rgba(255, 255, 255, 0.979);
+  text-align: center;
+  text-shadow: 2px 2px #000000;
+}
+
+.mainTitleSmall {
+  position: relative;
+  color: #a77575;
+  font-size: 3rem;
+  font-family: "Raleway", sans-serif;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 2px 2px #000000;
+}
+
+.mainImg {
+  position: absolute;
+  background-image: url(../../assets/aboutus.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center top -900px;
+  width: 1903px;
+  height: 890px;
+  align-items: center;
+  opacity: 0.95;
+}
