@@ -1,0 +1,26 @@
+.addPhoto {
+  padding-top: 50px;
+}
+
+.addPhotoForm {
+}
+
+.addPhotoFormGroup {
+  margin-left: 200px;
+}
+
+.addPhotoTitle {
+    font-size: 30px;
+    border: none;
+    padding: 20px;
+    width: 70vw;
+}
+
+.addPhotoTitle:focus{
+    outline: none;
+}
+
+.addPhotoDescription{
+    font-size: 20px;
+}
+
