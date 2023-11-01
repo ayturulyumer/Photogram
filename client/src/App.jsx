@@ -4,7 +4,9 @@ import Footer from "./components/footer/Footer.jsx";
 import Details from "./pages/details/Details.jsx";
 import AddPhoto from "./pages/AddPhoto/AddPhoto.jsx";
 import Profile from "./pages/profile/profile.jsx";
-import "./app.css"
+import Login from "./pages/login/Login.jsx";
+import Register from "./pages/register/Register.jsx";
+import "./app.css";
 
 function App() {
   return (
@@ -13,8 +15,10 @@ function App() {
       {/* <Home /> */}
       {/* <Details/> */}
       {/* <AddPhoto/> */}
-    <Profile/>
-      <Footer/>
+      {/* <Profile /> */}
+      {/* <Login/> */}
+      <Register/>
+      <Footer />
     </body>
   );
 }
