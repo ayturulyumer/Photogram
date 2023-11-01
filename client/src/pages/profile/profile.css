@@ -1,0 +1,67 @@
+.profile {
+    display: flex;
+}
+
+.profileWrapper{
+    flex: 9;
+    padding: 20px;
+}
+
+.profileTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profileUpdateTitle{
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: lightcoral;
+}
+
+.profileDeleteTitle{
+    color: red;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.profileForm{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePicture{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.profileForm > label {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.profileForm > input {
+    color: gray;
+    margin: 10px 0;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid lightblue;
+}
+
+.profileSubmit {
+    width: 150px;
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: teal;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}

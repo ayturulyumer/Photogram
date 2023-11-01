@@ -3,6 +3,7 @@ import Home from "./pages/home/home.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Details from "./pages/details/Details.jsx";
 import AddPhoto from "./pages/AddPhoto/AddPhoto.jsx";
+import Profile from "./pages/profile/profile.jsx";
 import "./app.css"
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <NavBar />
       {/* <Home /> */}
       {/* <Details/> */}
-      <AddPhoto/>
+      {/* <AddPhoto/> */}
+    <Profile/>
       <Footer/>
     </body>
   );
