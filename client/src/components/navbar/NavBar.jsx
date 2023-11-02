@@ -12,7 +12,7 @@ export default function NavBar() {
       </div>
       <div className="navCenter">
         <ul className="navList">
-          <li className="navListItem">Home</li>
+          <li  className="navListItem">Home</li>
           <li className="navListItem">Profile</li>
           <li className="navListItem">Photos</li>
           <li className="navListItem">Add Photo</li>

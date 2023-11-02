@@ -8,16 +8,22 @@ import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
 import "./app.css";
 
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 function App() {
   return (
     <body className="appBody">
       <NavBar />
-      {/* <Home /> */}
-      {/* <Details/> */}
-      {/* <AddPhoto/> */}
-      {/* <Profile /> */}
-      {/* <Login/> */}
-      <Register/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/addphoto" element={<AddPhoto />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/photo/details/:photoId" element={<Details />} />
+        </Routes>
+      </Router>
       <Footer />
     </body>
   );
