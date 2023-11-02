@@ -25,7 +25,7 @@ export default function Register() {
       />
       <label>Repeat Password</label>
       <input
-        type="text"
+        type="password"
         className="registerInput"
         placeholder="Repeat your password"
       />
