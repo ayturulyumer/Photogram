@@ -1,5 +1,5 @@
 import "./posts.css";
-import Post from "../post/post.jsx";
+import Post from "../post/Post.jsx";
 
 export default function Posts({photos}) {
   return <div className="posts">

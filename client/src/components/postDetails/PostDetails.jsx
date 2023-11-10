@@ -1,16 +1,31 @@
+import { useLocation } from "react-router-dom";
 import "./postDetails.css";
+import { useEffect, useState } from "react";
+import * as photoApi from "../../apis/photoApi.js";
 
 export default function postDetails() {
+  const [photo,setPhoto] = useState([])
+  const location = useLocation()
+  const photoId = location.pathname.split("/")[3]
+
+  useEffect(() => {
+  photoApi.getSingle(photoId)
+  .then((data) => setPhoto(data))
+  .catch((err) => console.log(err))
+  }, []);
+
+  
+
   return (
     <div className="postDetails">
       <div className="postDetailsWrapper">
         <img
           className="postDetailsImg"
-          src="https://images.pexels.com/photos/2603464/pexels-photo-2603464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={photo.imageUrl}
           alt=""
         />
         <h1 className="postDetailsTitle">
-          Lorem ipsum dolor sit amet
+          {photo.title}
           <div className="postDetailsEdit">
           <i className="postDetailsIcon fa-regular fa-pen-to-square "></i>
             <i className="postDetailsIcon fa-solid fa-trash-can "></i>
@@ -18,34 +33,12 @@ export default function postDetails() {
         </h1>
         <div className="postDetailsInfo">
           <span className="postDetailsAuthor">
-            Posted by: <b>Ayturul</b>
+            Posted by: <b>{photo.postedBy}</b>
           </span>
-          <span className="postDetailsDate">2 hours ago</span>
+          <span className="postDetailsDate">{photo.postTime}</span>
         </div>
         <p className="postDetailsDescription">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat
-          tenetur eligendi nihil vero a in molestias dolore est veniam
-          provident, consequatur eius doloribus asperiores neque commodi, autem
-          cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias
-          dolore est veniam provident, consequatur eius doloribus asperiores
-          neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in
-          molestias dolore est veniam provident, consequatur eius doloribus
-          asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum
-          dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi
-          nihil vero a in molestias dolore est veniam provident, consequatur
-          eius doloribus asperiores neque commodi, autem cumque. Magnam, hic.
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat
-          tenetur eligendi nihil vero a in molestias dolore est veniam
-          provident, consequatur eius doloribus asperiores neque commodi, autem
-          cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias
-          dolore est veniam provident, consequatur eius doloribus asperiores
-          neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in
-          molestias dolore est veniam provident, consequatur eius doloribus
-          asperiores neque commodi, autem cumque. Magnam, hic.
+          {photo.description}
         </p>
       </div>
     </div>
