@@ -1,13 +1,10 @@
 import "./posts.css";
 import Post from "../post/post.jsx";
 
-export default function Posts() {
+export default function Posts({photos}) {
   return <div className="posts">
-   <Post/>
-   <Post/>
-   <Post/>
-   <Post/>
-   <Post/>
-   <Post/>
+    {photos.map((photo) =>(
+      <Post photo={photo} key={photo._id}/>
+    ))}
   </div>;
 }

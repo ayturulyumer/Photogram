@@ -6,7 +6,7 @@
   top: 0;
   display: flex;
   align-items: center;
-  font-family: "Cinzel", serif;
+  font-family: 'Times New Roman', Times, serif;
   z-index: 999;
 }
 
@@ -42,7 +42,17 @@
   font-size: 22px;
   font-weight: 300;
   cursor: pointer;
+  transition: 0.4s;
+  text-decoration: none;
+  padding: 0 10px;
+  margin: 0 10px;
 }
+
+.navListItem:hover{
+  background: linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%);
+  padding: 10px 10px;
+}
+
 
 .navIcon {
     margin-right: 10px;

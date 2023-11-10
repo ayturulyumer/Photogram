@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <body className="appBody">
+    <div className="appBody">
       <Router>
       <NavBar />
         <Routes>
@@ -27,7 +27,7 @@ function App() {
         </Routes>
       <Footer />
       </Router>
-    </body>
+    </div>
   );
 }
 

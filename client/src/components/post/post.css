@@ -8,6 +8,14 @@
   height: 280px;
   object-fit: cover;
   border-radius: 10px;
+  -webkit-transform: scale(1.5);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.PostImg:hover {
+  -webkit-transform: scale(1);
+  transform: scale(0.90);
 }
 
 .PostInfo {
@@ -24,8 +32,8 @@
 }
 
 .PostLine {
-    width: 100%;
-    color: black;
+  width: 100%;
+  color: black;
 }
 
 .PostDate {
@@ -44,5 +52,3 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
-
-

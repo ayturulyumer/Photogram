@@ -1,38 +1,22 @@
 import "./post.css";
-
-export default function Post() {
+import { Link } from "react-router-dom";
+export default function Post({photo}) {
   return (
     <div className="Post">
+      <Link to="/photo/details/:photoId">
       <img
         className="PostImg"
-        src="https://images.pexels.com/photos/2603464/pexels-photo-2603464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        src={photo.imageUrl}
         alt=""
       />
+      </Link>
       <div className="PostInfo">
-        <span className="PostTitle">Lorem ipsum dolor</span>
+        <span className="PostTitle">{photo.photoTitle}</span>
         <hr className="PostLine" /> 
-        <span className="PostDate">2 hours ago</span>
+        <span className="PostDate">{photo.postTime}</span>
       </div>
       <p className="PostDescription">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor accusantium maiores quibusdam molestias libero quam error esse
+       {photo.photoDescription}
         </p>
     </div>
   );

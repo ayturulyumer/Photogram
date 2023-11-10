@@ -31,35 +31,35 @@ export default function NavBar() {
         <ul className="navList">
           <li className="navListItem">
             <Link to="/" className="link">
-              Home
+              HOME
             </Link>
           </li>
           <li className="navListItem">
             <Link to="/profile" className="link">
-              Profile
+              PROFILE
             </Link>
           </li>
           <li className="navListItem">
             <Link to="/photos" className="link">
-              Photos
+              PHOTOS
             </Link>
           </li>
           <li className="navListItem">
             <Link to="/addphoto" className="link">
-              Add Photo
+              ADD PHOTO
             </Link>
           </li>
           <li className="navListItem">
             <Link to="/login" className="link">
-              Login
+              LOGIN
             </Link>
           </li>
           <li className="navListItem">
             <Link to="/register" className="link">
-              Register
+              REGISTER
             </Link>
           </li>
-          <li className="navListItem">Logout</li>
+          <li className="navListItem">LOGOUT</li>
         </ul>
       </div>
       <div className="navRight">
