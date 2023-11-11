@@ -15,7 +15,7 @@
 }
 .PostImg:hover {
   -webkit-transform: scale(1);
-  transform: scale(0.90);
+  transform: scale(0.9);
 }
 
 .PostInfo {
@@ -29,6 +29,7 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  color: black;
 }
 
 .PostLine {
@@ -40,6 +41,7 @@
   font-family: "Raleway", sans-serif;
   font-style: italic;
   font-size: 12px;
+  color: #b39656;
 }
 
 .PostDescription {
