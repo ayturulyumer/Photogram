@@ -1,5 +1,6 @@
 import "./post.css";
 import { Link } from "react-router-dom";
+import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 export default function Post({photo}) {
   return (
     <div className="Post">
@@ -13,7 +14,7 @@ export default function Post({photo}) {
       <div className="PostInfo">
         <span className="PostTitle">{photo.title}</span>
         <hr className="PostLine" /> 
-        <span className="PostDate">{photo.postTime}</span>
+        <span className="PostDate">{formatDateWithNamedDayAndMonth(photo.createdAt)}</span>
       </div>
       <p className="PostDescription">
        {photo.description}
