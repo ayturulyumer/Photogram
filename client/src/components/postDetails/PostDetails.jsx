@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import "./postDetails.css";
 import { useEffect, useState } from "react";
 import * as photoApi from "../../apis/photoApi.js";
+import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 
 export default function postDetails() {
   const [photo,setPhoto] = useState([])
@@ -33,9 +34,9 @@ export default function postDetails() {
         </h1>
         <div className="postDetailsInfo">
           <span className="postDetailsAuthor">
-            Posted by: <b>{photo.postedBy}</b>
+            Posted by: <b>{photo.createdBy}</b>
           </span>
-          <span className="postDetailsDate">{photo.postTime}</span>
+          <span className="postDetailsDate">{formatDateWithNamedDayAndMonth(photo.createdAt)}</span>
         </div>
         <p className="postDetailsDescription">
           {photo.description}
