@@ -7,7 +7,7 @@ export default function NavBar() {
     <div className="nav">
       <div className="navLeft">
         <Link to={"/"} className="link">
-      <div className="logo"></div>
+          <div className="logo"></div>
         </Link>
       </div>
       <div className="navCenter">
@@ -15,11 +15,6 @@ export default function NavBar() {
           <li className="navListItem">
             <Link to="/" className="link">
               HOME
-            </Link>
-          </li>
-          <li className="navListItem">
-            <Link to="/profile" className="link">
-              PROFILE
             </Link>
           </li>
           <li className="navListItem">
@@ -46,13 +41,29 @@ export default function NavBar() {
         </ul>
       </div>
       <div className="navRight">
-        <Link to="/profile">
+        <ul className="wrapper">
           <img
             className="navImg"
             src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
             alt=""
           />
-        </Link>
+        <ul className="dropdown">
+        <li className="sub-item">
+            <span className="material-symbols-outlined">grid_view</span>
+            <p>Dashboard</p>
+          </li>
+          <Link to="/profile" className="link">
+          <li className="sub-item">
+            <span className="material-symbols-outlined">manage_accounts</span>
+            <p>Profile</p>
+          </li>
+          </Link>
+          <li className="sub-item">
+            <span className="material-symbols-outlined">logout</span>
+            <p>Logout</p>
+          </li>
+        </ul>
+        </ul>
         <i
           className="navSearchIcon fa-solid fa-magnifying-glass fa-xl"
           style={{ color: "#000000" }}
