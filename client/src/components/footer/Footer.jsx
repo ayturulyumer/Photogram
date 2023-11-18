@@ -1,11 +1,11 @@
-import { Fragment } from "react";
+
 import "./footer.css";
 
 export default function Footer() {
   return (
     <>
       {/* Remove the container if you want to extend the Footer to full width. */}
-      <div className="container">
+      <div className="containerFooter">
         <footer className="footer">
           <div className="footerIcons">
             <i

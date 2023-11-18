@@ -10,6 +10,7 @@ import Register from "./pages/register/Register.jsx";
 import "./app.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MyPhotos from "./pages/myPhotos/MyPhotos.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/addphoto" element={<AddPhoto />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/photo/details/:photoId" element={<Details />} />
+          <Route path="/myphotos" element={<MyPhotos/>}/>
         </Routes>
       <Footer />
       </Router>

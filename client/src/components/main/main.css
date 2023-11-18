@@ -1,7 +1,7 @@
 .main {
   background: radial-gradient(circle at 10% 20%, rgb(253, 239, 132) 0%, rgb(247, 198, 169) 54.2%, rgb(21, 186, 196) 100.3%);
   width: 1903px;
-  height: 890px;
+  height: 1000px;
 }
 
 .mainTitleLarge {
@@ -28,7 +28,6 @@
 
 .mainImg {
   position: relative;
-  bottom: 100px;
   left: 1000px;
   width: 800px;
   height: 800px;
