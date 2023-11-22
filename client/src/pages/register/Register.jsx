@@ -1,9 +1,12 @@
 import "./register.css";
 import * as userApi from "../../apis/usersApi.js";
 import { useForm } from "../../hooks/useForm.js";
+import { useNavigate } from "react-router-dom";
 import { inputValidator } from "../../hooks/inputValidator.js";
+import { Link } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate()
   const onRegisterHandler = async (data) => {
     const { repeatPassword, ...registerData } = data;
     if (repeatPassword != registerData.password) {
@@ -12,7 +15,7 @@ export default function Register() {
     try {
       console.log(registerData)
       const user = await userApi.register(registerData);
-      console.log(user);
+      navigate("/")
     } catch (error) {
       console.log(error);
     }
@@ -92,6 +95,9 @@ export default function Register() {
               <button type="submit" className="registerButton">
                 Register
               </button>
+              <div className="signup-link">
+                Already a member ? <Link to={"/login"}>Login now</Link>
+              </div>
             </form>
           </div>
         </div>
