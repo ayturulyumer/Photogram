@@ -17,6 +17,7 @@ export default function Photos() {
       .catch((err) => console.log(err))
       .finally(() => setShowLoading(false));
   }, []);
+  console.log(photos)
   return (
     <div className="details">
       {loading && <Loader/>}

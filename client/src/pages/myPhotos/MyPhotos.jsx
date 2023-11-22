@@ -16,7 +16,7 @@ export default function MyPhotos() {
                 style={{ width: 150 }}
               >
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                  src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
                   alt="Generic placeholder image"
                   className="img-fluid img-thumbnail mt-4 mb-2"
                   style={{ width: 150, zIndex: 1 }}

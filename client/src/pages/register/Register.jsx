@@ -70,18 +70,92 @@ export default function Register() {
     try {
       console.log(Object.values(input))
       const user = await userApi.register(input);
-      console.log(user);
     } catch (e) {
 
     }
   };
 
-  return (
-    <div className="register">
-      <span className="registerTitle">Register</span>
-      <form className="registerForm" onSubmit={registerHandler}>
+//   return (
+//     <div className="register">
+//       <span className="registerTitle">Register</span>
+//       <form className="registerForm" onSubmit={registerHandler}>
+//         <label>Username</label>
+//         <input
+//           type="text"
+//           className="registerInput"
+//           placeholder="Enter your username"
+//           name="username"
+//           value={input.username}
+//           onChange={onInputChange}
+//           onBlur={validateInput}
+//         />
+//         {error.username && (
+//           <span style={{ color: "red" }}>{error.username}</span>
+//         )}
+//         <label>Email</label>
+//         <input
+//           type="text"
+//           className="registerInput"
+//           placeholder="Enter your email"
+//           name="email"
+//           value={input.email}
+//           onChange={onInputChange}
+//           onBlur={validateInput}
+//         />
+//         {error.email && <span style={{ color: "red" }}>{error.email}</span>}
+//         <label>Password</label>
+//         <input
+//           type="password"
+//           className="registerInput"
+//           placeholder="Enter your password"
+//           name="password"
+//           value={input.password}
+//           onChange={onInputChange}
+//           onBlur={validateInput}
+//         />
+//         {error.password && (
+//           <span style={{ color: "red" }}>{error.password}</span>
+//         )}
+//         <label>Repeat Password</label>
+//         <input
+//           type="password"
+//           className="registerInput"
+//           placeholder="Repeat your password"
+//           name="repeatPassword"
+//           value={input.repeatPassword}
+//           onChange={onInputChange}
+//           onBlur={validateInput}
+//         />
+//         {error.repeatPassword && (
+//           <span style={{ color: "red" }}>{error.repeatPassword}</span>
+//         )}
+//         <button className="registerButton">Register</button>
+//       </form>
+//       <button className="registerLoginButton">Login</button>
+//     </div>
+//   );
+
+
+return(
+  <div className="parent clearfix">
+  <div className="register">
+  </div>
+  <div className="login">
+    <div className="container">
+      <h1>
+        Register
+        your account
+      </h1>
+      <div className="login-form">
+        {/* <form action="">
+          
+          <input type="email" placeholder="E-mail Address" />
+          <input type="password" placeholder="Password" />
+          <button type="submit">LOG-IN</button>
+        </form> */}
+         <form className="registerForm" onSubmit={registerHandler}>
         <label>Username</label>
-        <input
+         <input
           type="text"
           className="registerInput"
           placeholder="Enter your username"
@@ -130,9 +204,13 @@ export default function Register() {
         {error.repeatPassword && (
           <span style={{ color: "red" }}>{error.repeatPassword}</span>
         )}
-        <button className="registerButton">Register</button>
+        <button type="submit" className="registerButton" >Register</button>
       </form>
-      <button className="registerLoginButton">Login</button>
+      </div>
     </div>
-  );
+  </div>
+</div>
+)
 }
+
+

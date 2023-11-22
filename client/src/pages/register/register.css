@@ -1,4 +1,4 @@
-.register {
+/* .register {
   height: 840px;
   display: flex;
   flex-direction: column;
@@ -58,4 +58,41 @@
   color: white;
   border-radius: 10px;
   padding: 10px;
+} */
+
+.registerForm {
+  margin-top: -95px;
+}
+
+.login{
+ overflow: hidden;
+  margin-top: -95px
+}
+
+.registerButton {
+  margin-top: -30px;
+}
+
+.register {
+  border-radius: 5px;
+  position: relative;
+  height: 90vh;
+  width: 1194px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  ), url("https://images.pexels.com/photos/2179205/pexels-photo-2179205.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center scroll;
+  background-size: cover;
+  float: left;
+  -webkit-animation: bgslide 2.3s forwards;
+          animation: bgslide 2.3s forwards;
+}
+.register img {
+  width: 248px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  height: auto;
+  margin: 19px 0 0 25px;
 }

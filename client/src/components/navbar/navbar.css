@@ -58,9 +58,9 @@
 }
 
 .navListItem:hover {
-  background: gray;
+  background: white;
   padding: 10px 10px;
-  color: white;
+  color: blue;
 }
 
 .navIcon {
