@@ -13,7 +13,6 @@ export default function Register() {
       return;
     }
     try {
-      console.log(registerData)
       const user = await userApi.register(registerData);
       navigate("/")
     } catch (error) {
@@ -39,7 +38,7 @@ export default function Register() {
         <div className="container">
           <h1>Register your account</h1>
           <div className="login-form">
-            <form className="registerForm" onSubmit={onSubmit}>
+            <form className="registerForm" method="POST" onSubmit={onSubmit}>
               <label>Username</label>
               <input
                 type="text"
