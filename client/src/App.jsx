@@ -7,6 +7,7 @@ import AddPhoto from "./pages/AddPhoto/AddPhoto.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
+import { AuthProvider } from "./contexts/authContext.jsx";
 import "./app.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -16,6 +17,7 @@ function App() {
   return (
     <div className="appBody">
       <Router>
+      <AuthProvider >
       <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,6 +30,7 @@ function App() {
           <Route path="/myphotos" element={<MyPhotos/>}/>
         </Routes>
       <Footer />
+    </AuthProvider>
       </Router>
     </div>
   );

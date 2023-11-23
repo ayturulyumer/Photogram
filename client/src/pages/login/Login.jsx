@@ -1,17 +1,15 @@
 import "./login.css";
 import { Link } from "react-router-dom";
-import * as userApi from "../../apis/usersApi.js";
 import { inputValidator } from "../../hooks/inputValidator.js";
 import { useForm } from "../../hooks/useForm.js";
+import { useContext } from "react";
+import authContext from "../../contexts/authContext.jsx";
 
 export default function Login() {
-  const onLoginHandler = async (data) => {
-    try {
-      const user = await userApi.login(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+const {onLoginHandler} = useContext(authContext)
+
+  
   const { error, input, validateInput } = inputValidator();
 
   const { values, changeHandler, onSubmit } = useForm(
@@ -28,7 +26,7 @@ export default function Login() {
         <div className="container">
           <h1>Login with your account</h1>
           <div className="login-form">
-            <form method="POST" onSubmit={onLoginHandler}>
+            <form method="POST" onSubmit={onSubmit}>
               <label>Email</label>
               <input
                 type="email"

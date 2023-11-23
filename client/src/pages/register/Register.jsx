@@ -1,24 +1,13 @@
 import "./register.css";
-import * as userApi from "../../apis/usersApi.js";
 import { useForm } from "../../hooks/useForm.js";
-import { useNavigate } from "react-router-dom";
 import { inputValidator } from "../../hooks/inputValidator.js";
 import { Link } from "react-router-dom";
+import authContext from "../../contexts/authContext.jsx";
+import { useContext } from "react";
 
 export default function Register() {
-  const navigate = useNavigate()
-  const onRegisterHandler = async (data) => {
-    const { repeatPassword, ...registerData } = data;
-    if (repeatPassword != registerData.password) {
-      return;
-    }
-    try {
-      const user = await userApi.register(registerData);
-      navigate("/")
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { onRegisterHandler } = useContext(authContext);
+
   const { error, input, validateInput } = inputValidator();
 
   const { values, changeHandler, onSubmit } = useForm(
