@@ -3,6 +3,7 @@ import "./postDetails.css";
 import { useEffect, useState } from "react";
 import * as photoApi from "../../apis/photoApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
+import Comment from "../comments/Comment.jsx";
 
 export default function postDetails() {
   const [photo,setPhoto] = useState([])
@@ -42,6 +43,8 @@ export default function postDetails() {
           {photo.description}
         </p>
       </div>
+      {/** Comment section */}
+      <Comment/>
     </div>
   );
 }
