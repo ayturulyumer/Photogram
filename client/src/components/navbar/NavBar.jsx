@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
-
 import "./navbar.css";
-
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../contexts/authContext.jsx";
 export default function NavBar() {
+  const { isAuthenticated } = useContext(AuthContext)
   return (
+
     <div className="nav">
       <div className="navLeft">
         <Link to={"/"} className="link">
@@ -22,11 +24,21 @@ export default function NavBar() {
               PHOTOS
             </Link>
           </li>
+
+        {/*If user is authenticated */}
+          {isAuthenticated && (
+            <>
           <li className="navListItem">
             <Link to="/addphoto" className="link">
               ADD PHOTO
             </Link>
           </li>
+
+            </>
+          )}
+           {/*If user is  not authenticated */}
+          {!isAuthenticated && (
+            <>
           <li className="navListItem">
             <Link to="/login" className="link">
               LOGIN
@@ -37,9 +49,13 @@ export default function NavBar() {
               REGISTER
             </Link>
           </li>
-          <li className="navListItem">LOGOUT</li>
+            </>
+
+          )}
         </ul>
       </div>
+      {/** css breaks if i put it on the first check */}
+      {isAuthenticated && (
       <div className="navRight">
         <ul className="wrapper">
           <img
@@ -69,6 +85,7 @@ export default function NavBar() {
           style={{ color: "#000000" }}
         ></i>
       </div>
+      )}
     </div>
   );
 }
