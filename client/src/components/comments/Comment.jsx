@@ -1,32 +1,36 @@
+import { useContext } from "react";
+import AuthContext from "../../contexts/authContext.jsx";
 import "./comment.css";
 
 export default function Comment() {
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <div className="container bootstrap snippets bootdey">
       <div className="row">
         <div className="col-md-12">
           <div className="blog-comment">
-            <h3 className="text-success">Comments</h3>
-            <article className="create-comment">
-              <form className="form">
-              <img
-                  src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
-                  className="userAvatar"
-                  alt=""
-                />
-                <textarea
-                  name="comment"
-                  placeholder="Comment......"
-                  defaultValue={""}
-                />
-                <input
-                  className="btnSubmit"
-                  type="submit"
-                  defaultValue="Add Comment"
-                />
-              </form>
-            </article>
-
+            <h3 className="text">Comments: </h3>
+            {isAuthenticated && (
+              <article className="create-comment">
+                <form className="form">
+                  <img
+                    src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
+                    className="userAvatar"
+                    alt=""
+                  />
+                  <textarea
+                    name="comment"
+                    placeholder="Comment......"
+                    defaultValue={""}
+                  />
+                  <input
+                    className="btnSubmit"
+                    type="submit"
+                    defaultValue="Add Comment"
+                  />
+                </form>
+              </article>
+            )}
             <ul className="comments">
               <li className="clearfix">
                 <img

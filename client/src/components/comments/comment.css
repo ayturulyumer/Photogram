@@ -119,18 +119,18 @@ a {
 }
 
 .form {
-    
   border: none;
   box-shadow: none;
 }
 .form > textarea {
+  font-family: "Times New Roman", Times, serif;
   margin-left: 40px;
   border: 1px solid #020202;
   border-radius: 10px;
 }
 
 .btnSubmit {
-  margin-left: 65px;
+  margin-left: 40px;
   background: linear-gradient(
     178deg,
     rgba(201, 234, 252, 0.51) 14.9%,
@@ -155,5 +155,12 @@ a {
   float: left;
   width: 60px;
   height: 60px;
+}
 
+.text {
+  font-family: "Cinzel", serif;
+  position: relative;
+  text-align: left;
+  color: black;
+  margin-top: 250px;
 }
