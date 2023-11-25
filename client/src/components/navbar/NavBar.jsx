@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext.jsx";
 export default function NavBar() {
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext);
   return (
-
     <div className="nav">
       <div className="navLeft">
         <Link to={"/"} className="link">
@@ -25,66 +24,68 @@ export default function NavBar() {
             </Link>
           </li>
 
-        {/*If user is authenticated */}
+          {/*If user is authenticated */}
           {isAuthenticated && (
             <>
-          <li className="navListItem">
-            <Link to="/addphoto" className="link">
-              ADD PHOTO
-            </Link>
-          </li>
-
+              <li className="navListItem">
+                <Link to="/addphoto" className="link">
+                  ADD PHOTO
+                </Link>
+              </li>
             </>
           )}
-           {/*If user is  not authenticated */}
+          {/*If user is  not authenticated */}
           {!isAuthenticated && (
             <>
-          <li className="navListItem">
-            <Link to="/login" className="link">
-              LOGIN
-            </Link>
-          </li>
-          <li className="navListItem">
-            <Link to="/register" className="link">
-              REGISTER
-            </Link>
-          </li>
+              <li className="navListItem">
+                <Link to="/login" className="link">
+                  LOGIN
+                </Link>
+              </li>
+              <li className="navListItem">
+                <Link to="/register" className="link">
+                  REGISTER
+                </Link>
+              </li>
             </>
-
           )}
         </ul>
       </div>
       {/** css breaks if i put it on the first check */}
       {isAuthenticated && (
-      <div className="navRight">
-        <ul className="wrapper">
-          <img
-            className="navImg"
-            src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
-            alt=""
-          />
-        <ul className="dropdown">
-        <li className="sub-item">
-            <span className="material-symbols-outlined">grid_view</span>
-            <p>Dashboard</p>
-          </li>
-          <Link to="/profile" className="link">
-          <li className="sub-item">
-            <span className="material-symbols-outlined">manage_accounts</span>
-            <p>Profile</p>
-          </li>
-          </Link>
-          <li className="sub-item">
-            <span className="material-symbols-outlined">logout</span>
-            <p>Logout</p>
-          </li>
-        </ul>
-        </ul>
-        <i
-          className="navSearchIcon fa-solid fa-magnifying-glass fa-xl"
-          style={{ color: "#000000" }}
-        ></i>
-      </div>
+        <div className="navRight">
+          <ul className="wrapper">
+            <img
+              className="navImg"
+              src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
+              alt=""
+            />
+            <ul className="dropdown">
+              <li className="sub-item">
+                <span className="material-symbols-outlined">grid_view</span>
+                <p>Dashboard</p>
+              </li>
+              <Link to="/profile" className="link">
+                <li className="sub-item">
+                  <span className="material-symbols-outlined">
+                    manage_accounts
+                  </span>
+                  <p>Profile</p>
+                </li>
+              </Link>
+              <Link to ="/logout" className="link">
+                <li className="sub-item">
+                  <span className="material-symbols-outlined">logout</span>
+                  <p>Logout</p>
+                </li>
+              </Link>
+            </ul>
+          </ul>
+          <i
+            className="navSearchIcon fa-solid fa-magnifying-glass fa-xl"
+            style={{ color: "#000000" }}
+          ></i>
+        </div>
       )}
     </div>
   );

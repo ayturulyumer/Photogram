@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const onLoginHandler = async (data) => {
     try {
       const user = await userApi.login(data);
+      console.log(user)
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
       navigate("/");
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const onRegisterHandler = async (data) => {
     const { repeatPassword, ...registerData } = data;
+    // TODO : Add proper error message
     if (repeatPassword != registerData.password) {
       return;
     }
@@ -40,9 +42,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const onLogoutHandler = async () => {
+    setAuth({})
+    localStorage.removeItem("accessToken")
+  }
+
   const values = {
     onRegisterHandler,
     onLoginHandler,
+    onLogoutHandler,
     userId: auth._id,
     username: auth.username || auth.email,
     email: auth.email,

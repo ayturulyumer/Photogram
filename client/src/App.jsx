@@ -5,8 +5,9 @@ import Photos from "./pages/photos/Photos.jsx";
 import Details from "./pages/details/Details.jsx";
 import AddPhoto from "./pages/AddPhoto/AddPhoto.jsx";
 import Profile from "./pages/profile/Profile.jsx";
-import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
+import Login from "./pages/login/Login.jsx";
+import Logout from "./pages/logout/Logout.jsx";
 import { AuthProvider } from "./contexts/authContext.jsx";
 import "./app.css";
 
@@ -17,20 +18,21 @@ function App() {
   return (
     <div className="appBody">
       <Router>
-      <AuthProvider >
-      <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/photos" element={<Photos />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/addphoto" element={<AddPhoto />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/photo/details/:photoId" element={<Details />} />
-          <Route path="/myphotos" element={<MyPhotos/>}/>
-        </Routes>
-      <Footer />
-    </AuthProvider>
+        <AuthProvider>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/photos" element={<Photos />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/addphoto" element={<AddPhoto />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/photo/details/:photoId" element={<Details />} />
+            <Route path="/myphotos" element={<MyPhotos />} />
+          </Routes>
+          <Footer />
+        </AuthProvider>
       </Router>
     </div>
   );
