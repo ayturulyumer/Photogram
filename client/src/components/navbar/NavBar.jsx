@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext.jsx";
 export default function NavBar() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated , userAvatar } = useContext(AuthContext);
   return (
     <div className="nav">
       <div className="navLeft">
@@ -57,7 +57,7 @@ export default function NavBar() {
           <ul className="wrapper">
             <img
               className="navImg"
-              src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
+              src={userAvatar}
               alt=""
             />
             <ul className="dropdown">

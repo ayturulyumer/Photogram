@@ -27,13 +27,13 @@ export const AuthProvider = ({ children }) => {
   const onRegisterHandler = async (data) => {
     const { repeatPassword, ...registerData } = data;
     // TODO : Add proper error message
-    console.log(registerData);
+
     if (repeatPassword != registerData.password) {
       return;
     }
     try {
-      const user = await userApi.register({...registerData});
-      console.log(user);
+      const user = await userApi.register(registerData);
+
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
       navigate("/");
@@ -53,7 +53,8 @@ export const AuthProvider = ({ children }) => {
     onLoginHandler,
     onLogoutHandler,
     userId: auth._id,
-    username: auth.username || auth.email,
+    username: auth.username,
+    userAvatar: auth.avatar,
     email: auth.email,
     token: auth.accessToken,
     isAuthenticated: !!auth.accessToken,

@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import AuthContext from "../../contexts/authContext.jsx";
+import AuthContext from "../../contexts/AuthContext.jsx";
 import "./comment.css";
 
 export default function Comment() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated , userAvatar } = useContext(AuthContext);
   return (
     <div className="container bootstrap snippets bootdey">
       <div className="row">
@@ -14,7 +14,7 @@ export default function Comment() {
               <article className="create-comment">
                 <form className="form">
                   <img
-                    src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
+                    src={userAvatar}
                     className="userAvatar"
                     alt=""
                   />

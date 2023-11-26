@@ -1,5 +1,5 @@
 const baseUrl = "http://localhost:3030/users";
-import * as request from "../../../lib/request.js";
+import * as request from "../lib/request.js";
 
 export const login = async (data) => {
   const result = request.post(`${baseUrl}/login`, data);

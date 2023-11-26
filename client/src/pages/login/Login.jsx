@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { inputValidator } from "../../hooks/inputValidator.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useContext } from "react";
-import authContext from "../../contexts/authContext.jsx";
+import AuthContext from "../../contexts/AuthContext.jsx";
 
 export default function Login() {
 
-const {onLoginHandler} = useContext(authContext)
+const {onLoginHandler} = useContext(AuthContext)
 
   
   const { error, input, validateInput } = inputValidator();
