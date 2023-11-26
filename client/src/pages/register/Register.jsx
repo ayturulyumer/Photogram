@@ -2,17 +2,18 @@ import "./register.css";
 import { useForm } from "../../hooks/useForm.js";
 import { inputValidator } from "../../hooks/inputValidator.js";
 import { Link } from "react-router-dom";
-import authContext from "../../contexts/authContext.jsx";
+import AuthContext from "../../contexts/AuthContext.jsx";
 import { useContext } from "react";
 
 export default function Register() {
-  const { onRegisterHandler } = useContext(authContext);
+  const { onRegisterHandler } = useContext(AuthContext);
 
   const { error, input, validateInput } = inputValidator();
 
   const { values, changeHandler, onSubmit } = useForm(
     {
       username: "",
+      avatar: "https://static.thenounproject.com/png/363640-200.png",
       email: "",
       password: "",
       repeatPassword: "",

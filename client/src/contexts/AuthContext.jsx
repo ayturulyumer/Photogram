@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as userApi from "../apis/usersApi.js"
+import * as userApi from "../apis/usersApi.js";
 
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   const onLoginHandler = async (data) => {
     try {
       const user = await userApi.login(data);
-      console.log(user)
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
       navigate("/");
@@ -28,11 +27,13 @@ export const AuthProvider = ({ children }) => {
   const onRegisterHandler = async (data) => {
     const { repeatPassword, ...registerData } = data;
     // TODO : Add proper error message
+    console.log(registerData);
     if (repeatPassword != registerData.password) {
       return;
     }
     try {
-      const user = await userApi.register(registerData);
+      const user = await userApi.register({...registerData});
+      console.log(user);
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
       navigate("/");
@@ -43,11 +44,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const onLogoutHandler = async () => {
-    setAuth({})
-    localStorage.removeItem("accessToken")
-  }
+    setAuth({});
+    localStorage.removeItem("accessToken");
+  };
 
-  const values = {
+  const contextValues = {
     onRegisterHandler,
     onLoginHandler,
     onLogoutHandler,
@@ -59,12 +60,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-   <AuthContext.Provider value={values}>
-    {children}
+    <AuthContext.Provider value={contextValues}>
+      {children}
     </AuthContext.Provider>
   );
 };
 
 export default AuthContext;
-
-

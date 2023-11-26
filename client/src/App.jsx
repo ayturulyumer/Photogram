@@ -8,7 +8,7 @@ import Profile from "./pages/profile/Profile.jsx";
 import Register from "./pages/register/Register.jsx";
 import Login from "./pages/login/Login.jsx";
 import Logout from "./pages/logout/Logout.jsx";
-import { AuthProvider } from "./contexts/authContext.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 import "./app.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
