@@ -7,7 +7,6 @@ export const login = async (data) => {
 };
 
 export const register = async (data) => {
-  console.log(data)
   const result = await request.post(`${baseUrl}/register`, data);
   return result;
 };

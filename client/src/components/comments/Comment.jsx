@@ -1,27 +1,35 @@
-import { useContext } from "react";
-import AuthContext from "../../contexts/AuthContext.jsx";
 import "./comment.css";
+import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 
-export default function Comment() {
-  const { isAuthenticated , userAvatar } = useContext(AuthContext);
+export default function Comment({
+  comments,
+  onSubmit,
+  values,
+  changeHandler,
+  isAuthenticated,
+  userAvatar,
+}) {
+
   return (
     <div className="container bootstrap snippets bootdey">
       <div className="row">
         <div className="col-md-12">
           <div className="blog-comment">
             <h3 className="text">Comments: </h3>
+            <hr />
             {isAuthenticated && (
               <article className="create-comment">
-                <form className="form">
+                <form className="form" method="POST" onSubmit={onSubmit}>
                   <img
                     src={userAvatar}
                     className="userAvatar"
-                    alt=""
+                    alt={userAvatar}
                   />
                   <textarea
-                    name="comment"
+                    name="text"
                     placeholder="Comment......"
-                    defaultValue={""}
+                    value={values.text}
+                    onChange={changeHandler}
                   />
                   <input
                     className="btnSubmit"
@@ -32,38 +40,28 @@ export default function Comment() {
               </article>
             )}
             <ul className="comments">
-              <li className="clearfix">
-                <img
-                  src="https://bootdey.com/img/Content/user_1.jpg"
-                  className="avatar"
-                  alt=""
-                />
-                <div className="post-comments">
-                  <p className="meta">
-                    Dec 18, 2014 <a href="#">JohnDoe</a> says :{" "}
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Etiam a sapien odio, sit amet
-                  </p>
-                </div>
-              </li>
-              <li className="clearfix">
-                <img
-                  src="https://bootdey.com/img/Content/user_2.jpg"
-                  className="avatar"
-                  alt=""
-                />
-                <div className="post-comments">
-                  <p className="meta">
-                    Dec 19, 2014 <a href="#">JohnDoe</a> says :{" "}
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Etiam a sapien odio, sit amet
-                  </p>
-                </div>
-              </li>
+              {/**Single Comment */}
+              {/**Could put it in another component , but i decided it's fine like this for this project */}
+              {comments.map(({ _id, text, username ,userAvatar , _createdOn }) => (
+                <li className="clearfix" key={_id}>
+                  <img
+                    src={userAvatar}
+                    className="avatar"
+                    alt={userAvatar}
+                  />
+                  <div className="post-comments">
+                    <p className="meta">
+                      {formatDateWithNamedDayAndMonth(_createdOn)} <a href="#">{username}</a> says :{" "}
+                    </p>
+                    <p>
+                     {text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+              {comments.length === 0 && (
+                <p className="no-comment">No comments yet. Be the first!</p>
+              )}
             </ul>
           </div>
         </div>
