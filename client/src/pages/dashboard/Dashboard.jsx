@@ -1,6 +1,6 @@
-import "./myphotos.css";
+import "./dashboard.css";
 
-export default function MyPhotos() {
+export default function Dashboard() {
   return (
     <section className="h-100 gradient-custom-2">
     <div className="container py-5 h-100">

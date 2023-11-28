@@ -61,10 +61,12 @@ export default function NavBar() {
               alt=""
             />
             <ul className="dropdown">
+              <Link to="/dashboard" className="link">
               <li className="sub-item">
                 <span className="material-symbols-outlined">grid_view</span>
                 <p>Dashboard</p>
               </li>
+              </Link>
               <Link to="/profile" className="link">
                 <li className="sub-item">
                   <span className="material-symbols-outlined">

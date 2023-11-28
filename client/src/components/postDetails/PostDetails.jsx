@@ -21,6 +21,7 @@ export default function postDetails() {
   // const photoId = location.pathname.split("/")[3]
 
   const { photoId } = useParams();
+  
 
   useEffect(() => {
     photoApi
