@@ -1,19 +1,19 @@
 // used CHATGPT
 function formatDateWithNamedDayAndMonth(timestamp) {
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysOfWeek = ["Sunday", "Monday", "Tueday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
+    "January",
+    "February",
+    "March",
+    "April",
     "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const date = new Date(timestamp);
@@ -21,7 +21,7 @@ function formatDateWithNamedDayAndMonth(timestamp) {
   const dayOfWeek = daysOfWeek[date.getUTCDay()];
   const day = String(date.getUTCDate()).padStart(2, "0");
   const month = months[date.getUTCMonth()];
-  const year = String(date.getUTCFullYear()).slice(2);
+  const year = String(date.getUTCFullYear());
 
   return `${dayOfWeek}, ${day} ${month} ${year}`;
 }

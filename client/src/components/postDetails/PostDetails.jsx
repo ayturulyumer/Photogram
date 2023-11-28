@@ -72,7 +72,7 @@ export default function postDetails() {
             Posted by: <b>{photo.createdBy}</b>
           </span>
           <span className="postDetailsDate">
-            {formatDateWithNamedDayAndMonth(photo.createdAt)}
+            {formatDateWithNamedDayAndMonth(photo._createdOn)}
           </span>
         </div>
         <p className="postDetailsDescription">{photo.description}</p>

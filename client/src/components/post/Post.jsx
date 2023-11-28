@@ -14,7 +14,7 @@ export default function Post({photo}) {
       <div className="PostInfo">
         <span className="PostTitle">{photo.title}</span>
         <hr className="PostLine" /> 
-        <span className="PostDate">{formatDateWithNamedDayAndMonth(photo.createdAt)}</span>
+        <span className="PostDate">{formatDateWithNamedDayAndMonth(photo._createdOn)}</span>
       </div>
       <p className="PostDescription">
        {photo.description}

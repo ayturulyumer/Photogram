@@ -3,7 +3,7 @@ import Home from "./pages/home/home.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Photos from "./pages/photos/Photos.jsx";
 import Details from "./pages/details/Details.jsx";
-import AddPhoto from "./pages/AddPhoto/AddPhoto.jsx";
+import CreatePhoto from "./pages/createPhoto/CreatePhoto.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Register from "./pages/register/Register.jsx";
@@ -26,7 +26,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/addphoto" element={<AddPhoto />} />
+            <Route path="/create" element={<CreatePhoto />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/photo/details/:photoId" element={<Details />} />
             <Route path="/dashboard" element={<Dashboard />} />

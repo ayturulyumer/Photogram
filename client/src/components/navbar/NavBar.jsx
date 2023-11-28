@@ -28,7 +28,7 @@ export default function NavBar() {
           {isAuthenticated && (
             <>
               <li className="navListItem">
-                <Link to="/addphoto" className="link">
+                <Link to="/create" className="link">
                   ADD PHOTO
                 </Link>
               </li>
