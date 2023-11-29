@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "../../hooks/useForm.js";
 import * as photoApi from "../../apis/photoApi.js";
@@ -7,6 +7,7 @@ import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 import Comment from "../comments/Comment.jsx";
 import DeletePhoto from "../deletePhoto/DeletePhoto.jsx";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext.jsx";
 import "./postDetails.css";
 
@@ -23,6 +24,7 @@ export default function postDetails() {
   // const photoId = location.pathname.split("/")[3]
 
   const { photoId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     photoApi
@@ -42,8 +44,20 @@ export default function postDetails() {
   };
 
   const onClose = () => {
-    setShowDelete(false)
-  }
+    setShowDelete(false);
+  };
+
+  const onDeletePhotoHandler = async () => {
+    try {
+      await photoApi.remove(photoId);
+      navigate("/photos")
+    } catch (err) {
+      {
+        /** TODO ! Add proper error message */
+      }
+      console.log(err);
+    }
+  };
 
   const onCommentSubmit = async ({ text }) => {
     const newComment = await commentsApi.create(
@@ -61,12 +75,12 @@ export default function postDetails() {
     },
     onCommentSubmit
   );
-  console.log(showDelete);
 
   return (
     <>
-          {showDelete && <DeletePhoto onClose={onClose} />}
-
+      {showDelete && (
+        <DeletePhoto onClose={onClose} onDelete={onDeletePhotoHandler} />
+      )}
 
       <div className="postDetails">
         <div className="postDetailsWrapper">

@@ -14,3 +14,8 @@ export const getSingle = async (id) => {
   const photo = await request.get(`${baseUrl}/${id}`);
   return photo;
 };
+
+export const remove = async (id) => {
+  const result = await request.del(`${baseUrl}/${id}`);
+  return result;
+};
