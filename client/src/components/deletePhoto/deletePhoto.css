@@ -1,0 +1,58 @@
+.deleteModal {
+  text-align: center;
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 850px;
+  top: 300px;
+  width: auto;
+  height: auto;
+}
+.modalContent {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+}
+
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+.close {
+  color: rgb(255, 65, 65);
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #ff1010;
+  cursor: pointer;
+}
+.modalContent button {
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+}
+.del {
+  background-color: rgb(255, 65, 65);
+}
+.del:hover {
+  background-color: rgb(255, 7, 7);
+}
+.cancel:hover {
+  background-color: rgb(167, 167, 167);
+}

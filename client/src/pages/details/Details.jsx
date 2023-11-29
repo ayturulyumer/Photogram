@@ -1,4 +1,4 @@
-import PostDetails from "../../components/postDetails/postDetails.jsx";
+import PostDetails from "../../components/postDetails/PostDetails.jsx";
 import "./details.css";
 
 
