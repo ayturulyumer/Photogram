@@ -5,7 +5,8 @@ import * as photoApi from "../../apis/photoApi.js";
 import * as commentsApi from "../../apis/commentsApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 import Comment from "../comments/Comment.jsx";
-import DeletePhoto from "../deletePhoto/DeletePhoto.jsx";
+import DeletePhoto from "../deletePhotoModal/DeletePhotoModal.jsx";
+import SuccessMessageModal from "../successMessageModal/successMessageModal.jsx";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext.jsx";
@@ -15,6 +16,7 @@ export default function postDetails() {
   const [photo, setPhoto] = useState([]);
   const [comments, setComments] = useState([]);
   const [showDelete, setShowDelete] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const { isAuthenticated, username, userAvatar } = useContext(AuthContext);
   {
@@ -39,7 +41,6 @@ export default function postDetails() {
   }, [photoId]);
 
   const deletePhotoClickHandler = () => {
-    console.log("YOOO");
     setShowDelete(true);
   };
 
@@ -50,7 +51,8 @@ export default function postDetails() {
   const onDeletePhotoHandler = async () => {
     try {
       await photoApi.remove(photoId);
-      navigate("/photos")
+      setShowSuccess(true);
+      setTimeout(() => navigate("/photos"), 1500);
     } catch (err) {
       {
         /** TODO ! Add proper error message */
@@ -58,6 +60,7 @@ export default function postDetails() {
       console.log(err);
     }
   };
+
 
   const onCommentSubmit = async ({ text }) => {
     const newComment = await commentsApi.create(
@@ -75,12 +78,15 @@ export default function postDetails() {
     },
     onCommentSubmit
   );
+  console.log(showSuccess)
 
   return (
     <>
       {showDelete && (
         <DeletePhoto onClose={onClose} onDelete={onDeletePhotoHandler} />
       )}
+
+      {showSuccess &&  <SuccessMessageModal/>}
 
       <div className="postDetails">
         <div className="postDetailsWrapper">
