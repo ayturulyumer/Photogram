@@ -41,6 +41,10 @@ export default function postDetails() {
     setShowDelete(true);
   };
 
+  const onClose = () => {
+    setShowDelete(false)
+  }
+
   const onCommentSubmit = async ({ text }) => {
     const newComment = await commentsApi.create(
       photoId,
@@ -61,9 +65,11 @@ export default function postDetails() {
 
   return (
     <>
+          {showDelete && <DeletePhoto onClose={onClose} />}
+
+
       <div className="postDetails">
         <div className="postDetailsWrapper">
-          {showDelete && <DeletePhoto />}
           <img className="postDetailsImg" src={photo.imageUrl} alt="" />
           <h1 className="postDetailsTitle">
             {photo.title}
