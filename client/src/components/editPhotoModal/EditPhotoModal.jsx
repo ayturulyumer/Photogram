@@ -1,44 +1,55 @@
-import "./editPhotoModal.css"
+import "./editPhotoModal.css";
+import { useForm } from "../../hooks/useForm.js";
 
-export default function EditPhotoModal({onClose}) {
+export default function EditPhotoModal({ onClose, photoDetails, onEdit }) {
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      title: photoDetails.title,
+      imageUrl: photoDetails.imageUrl,
+      description: photoDetails.description,
+    },
+    onEdit
+  );
   return (
-    <div className="editModal" >
-    <div className="editModalContent">
-      <span className="close"  onClick={onClose}>
-            ×
-          </span>
-    <form method="POST">
-      <h1>Edit photo</h1>
-      <div className="info">
-        <input
-          className="title"
-          type="text"
-          name="title"
-          placeholder="Title"
-        //   value={values.title}
-        //   onChange={changeHandler}
-        />
-        <input
-          type="text"
-          name="imageUrl"
-          placeholder="Image Url"
-        //   value={values.imageUrl}
-        //   onChange={changeHandler}
-        />
+    <div className="editModal">
+      <div className="editModalContent">
+        <span className="close" onClick={onClose}>
+          ×
+        </span>
+        <form method="POST" onSubmit={onSubmit}>
+          <h1>Edit photo</h1>
+          <div className="info">
+            <input
+              className="title"
+              type="text"
+              name="title"
+              placeholder="Title"
+              defaultValue={photoDetails.title}
+              onChange={changeHandler}
+            />
+            <input
+              type="text"
+              name="imageUrl"
+              placeholder="Image Url"
+              defaultValue={photoDetails.imageUrl}
+              onChange={changeHandler}
+            />
+          </div>
+          <p>Description</p>
+          <div>
+            <textarea
+              name="description"
+              rows={4}
+              defaultValue={photoDetails.description}
+              onChange={changeHandler}
+            />
+          </div>
+          <button className="update">Update</button>
+          <button className="cancel" onClick={onClose}>
+            Cancel
+          </button>
+        </form>
       </div>
-      <p>Description</p>
-      <div>
-        <textarea
-          name="description"
-          rows={4}
-        //   value={values.description}
-        //   onChange={changeHandler}
-        />
-      </div>
-      <button className="update" >Update</button>
-      <button className="cancel" onClick={onClose}>Cancel</button>
-    </form>
     </div>
-  </div>
-  )
+  );
 }

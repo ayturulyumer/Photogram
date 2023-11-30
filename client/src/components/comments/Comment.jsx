@@ -1,14 +1,20 @@
 import "./comment.css";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
+import {useForm} from "../../hooks/useForm.js"
 
 export default function Comment({
   comments,
-  onSubmit,
-  values,
-  changeHandler,
+  onCommentSubmit,
   isAuthenticated,
   userAvatar,
 }) {
+
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      text: "",
+    },
+    onCommentSubmit
+  );
 
   return (
     <div className="container bootstrap snippets bootdey">

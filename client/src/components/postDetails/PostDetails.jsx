@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useForm } from "../../hooks/useForm.js";
 import * as photoApi from "../../apis/photoApi.js";
 import * as commentsApi from "../../apis/commentsApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
@@ -31,6 +30,8 @@ export default function postDetails() {
   const { photoId } = useParams();
   const navigate = useNavigate();
 
+
+{/**Get the photo and comments  */}
   useEffect(() => {
     photoApi
       .getSingle(photoId)
@@ -77,6 +78,7 @@ export default function postDetails() {
     }
   };
 
+
   const onCommentSubmit = async ({ text }) => {
     const newComment = await commentsApi.create(
       photoId,
@@ -87,18 +89,22 @@ export default function postDetails() {
     setComments((state) => [newComment, ...state]);
   };
 
-  const { values, changeHandler, onSubmit } = useForm(
-    {
-      text: "",
-    },
-    onCommentSubmit
-  );
+
+
+
+const onEditPhotoHandler = async (data) => {
+  const updatedPhoto = await photoApi.update(photoId,data)
+  setPhoto(updatedPhoto)
+  setShowEdit(false)
+}
+
+
 
   
 
   return (
     <>
-      {showEdit && <EditPhotoModal onClose={onClose} />}
+      {showEdit && <EditPhotoModal onClose={onClose} photoDetails={photo} onEdit={onEditPhotoHandler} />}
 
       {showDelete && (
         <DeletePhotoModal onClose={onClose} onDelete={onDeletePhotoHandler} />
@@ -140,9 +146,7 @@ export default function postDetails() {
           isAuthenticated={isAuthenticated}
           userAvatar={userAvatar}
           comments={comments}
-          onSubmit={onSubmit}
-          values={values}
-          changeHandler={changeHandler}
+          onCommentSubmit={onCommentSubmit}
         />
       </div>
     </>

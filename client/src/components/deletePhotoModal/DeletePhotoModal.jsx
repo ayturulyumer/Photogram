@@ -1,4 +1,6 @@
 import "./deletePhotoModal.css";
+
+
 export default function DeletePhotoModal({ onClose,onDelete }) {
   return (
     <div className="backdrop" onClick={onClose}>
