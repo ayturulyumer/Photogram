@@ -5,7 +5,8 @@ import * as photoApi from "../../apis/photoApi.js";
 import * as commentsApi from "../../apis/commentsApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 import Comment from "../comments/Comment.jsx";
-import DeletePhoto from "../deletePhotoModal/DeletePhotoModal.jsx";
+import DeletePhotoModal from "../deletePhotoModal/DeletePhotoModal.jsx"
+import EditPhotoModal from "../editPhotoModal/EditPhotoModal.jsx";
 import SuccessMessageModal from "../successMessageModal/successMessageModal.jsx";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ export default function postDetails() {
   const [comments, setComments] = useState([]);
   const [showDelete, setShowDelete] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showEdit,setShowEdit] = useState(false)
 
   const { isAuthenticated, username, userAvatar } = useContext(AuthContext);
   {
@@ -40,6 +42,10 @@ export default function postDetails() {
       .catch((err) => console.log(err));
   }, [photoId]);
 
+  const editPhotoClickHandler = () => {
+    setShowEdit(true)
+  }
+
   const deletePhotoClickHandler = () => {
     setShowDelete(true);
   };
@@ -51,7 +57,11 @@ export default function postDetails() {
   const onDeletePhotoHandler = async () => {
     try {
       await photoApi.remove(photoId);
+
+      {/** Show success message  */}
       setShowSuccess(true);
+
+    {/** Redirect to catalog after 1.5 seconds  */}
       setTimeout(() => navigate("/photos"), 1500);
     } catch (err) {
       {
@@ -82,8 +92,10 @@ export default function postDetails() {
 
   return (
     <>
+      {showEdit && (<EditPhotoModal/>)}
+
       {showDelete && (
-        <DeletePhoto onClose={onClose} onDelete={onDeletePhotoHandler} />
+        <DeletePhotoModal onClose={onClose} onDelete={onDeletePhotoHandler} />
       )}
 
       {showSuccess &&  <SuccessMessageModal/>}
@@ -94,7 +106,7 @@ export default function postDetails() {
           <h1 className="postDetailsTitle">
             {photo.title}
             <div className="postDetailsEdit">
-              <i className="postDetailsIcon fa-regular fa-pen-to-square "></i>
+              <i className="postDetailsIcon fa-regular fa-pen-to-square " onClick={editPhotoClickHandler}></i>
               <i
                 className="postDetailsIcon fa-solid fa-trash-can "
                 onClick={deletePhotoClickHandler}
