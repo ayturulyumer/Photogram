@@ -5,7 +5,7 @@ import * as photoApi from "../../apis/photoApi.js";
 import * as commentsApi from "../../apis/commentsApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 import Comment from "../comments/Comment.jsx";
-import DeletePhotoModal from "../deletePhotoModal/DeletePhotoModal.jsx"
+import DeletePhotoModal from "../deletePhotoModal/DeletePhotoModal.jsx";
 import EditPhotoModal from "../editPhotoModal/EditPhotoModal.jsx";
 import SuccessMessageModal from "../successMessageModal/successMessageModal.jsx";
 import { useContext } from "react";
@@ -18,9 +18,10 @@ export default function postDetails() {
   const [comments, setComments] = useState([]);
   const [showDelete, setShowDelete] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [showEdit,setShowEdit] = useState(false)
+  const [showEdit, setShowEdit] = useState(false);
 
-  const { isAuthenticated, username, userAvatar } = useContext(AuthContext);
+  const { isAuthenticated, username, userAvatar, userId } =
+    useContext(AuthContext);
   {
     /** Another way to get photoId */
   }
@@ -43,8 +44,8 @@ export default function postDetails() {
   }, [photoId]);
 
   const editPhotoClickHandler = () => {
-    setShowEdit(true)
-  }
+    setShowEdit(true);
+  };
 
   const deletePhotoClickHandler = () => {
     setShowDelete(true);
@@ -52,16 +53,21 @@ export default function postDetails() {
 
   const onClose = () => {
     setShowDelete(false);
+    setShowEdit(false);
   };
 
   const onDeletePhotoHandler = async () => {
     try {
       await photoApi.remove(photoId);
 
-      {/** Show success message  */}
+      {
+        /** Show success message  */
+      }
       setShowSuccess(true);
 
-    {/** Redirect to catalog after 1.5 seconds  */}
+      {
+        /** Redirect to catalog after 1.5 seconds  */
+      }
       setTimeout(() => navigate("/photos"), 1500);
     } catch (err) {
       {
@@ -70,7 +76,6 @@ export default function postDetails() {
       console.log(err);
     }
   };
-
 
   const onCommentSubmit = async ({ text }) => {
     const newComment = await commentsApi.create(
@@ -88,30 +93,37 @@ export default function postDetails() {
     },
     onCommentSubmit
   );
-  console.log(showSuccess)
+
+  
 
   return (
     <>
-      {showEdit && (<EditPhotoModal/>)}
+      {showEdit && <EditPhotoModal onClose={onClose} />}
 
       {showDelete && (
         <DeletePhotoModal onClose={onClose} onDelete={onDeletePhotoHandler} />
       )}
 
-      {showSuccess &&  <SuccessMessageModal/>}
+      {showSuccess && <SuccessMessageModal />}
 
       <div className="postDetails">
         <div className="postDetailsWrapper">
           <img className="postDetailsImg" src={photo.imageUrl} alt="" />
           <h1 className="postDetailsTitle">
             {photo.title}
-            <div className="postDetailsEdit">
-              <i className="postDetailsIcon fa-regular fa-pen-to-square " onClick={editPhotoClickHandler}></i>
-              <i
-                className="postDetailsIcon fa-solid fa-trash-can "
-                onClick={deletePhotoClickHandler}
-              ></i>
-            </div>
+            {/** IF it's owner show edit buttons */}
+            {userId && userId === photo._ownerId && (
+              <div className="postDetailsEdit">
+                <i
+                  className="postDetailsIcon fa-regular fa-pen-to-square "
+                  onClick={editPhotoClickHandler}
+                ></i>
+                <i
+                  className="postDetailsIcon fa-solid fa-trash-can "
+                  onClick={deletePhotoClickHandler}
+                ></i>
+              </div>
+            )}
           </h1>
           <div className="postDetailsInfo">
             <span className="postDetailsAuthor">

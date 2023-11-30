@@ -1,10 +1,10 @@
 import "./editPhotoModal.css"
 
-export default function EditPhotoModal() {
+export default function EditPhotoModal({onClose}) {
   return (
-    <div className="editModal">
+    <div className="editModal" >
     <div className="editModalContent">
-      <span className="close" >
+      <span className="close"  onClick={onClose}>
             ×
           </span>
     <form method="POST">
@@ -35,8 +35,8 @@ export default function EditPhotoModal() {
         //   onChange={changeHandler}
         />
       </div>
-      <button className="update" type="submit">Update</button>
-      <button className="cancel" type="">Cancel</button>
+      <button className="update" >Update</button>
+      <button className="cancel" onClick={onClose}>Cancel</button>
     </form>
     </div>
   </div>
