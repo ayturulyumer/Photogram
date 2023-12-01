@@ -16,8 +16,7 @@ export const getSingle = async (id) => {
 };
 
 export const remove = async (id) => {
-  const result = await request.del(`${baseUrl}/${id}`);
-  return result;
+  await request.del(`${baseUrl}/${id}`);
 };
 
 export const update = async (id,data) => {

@@ -130,6 +130,7 @@ img {
 .login .container .login-form form {
   display: -ms-grid;
   display: grid;
+  box-shadow: none;
 }
 .login .container .login-form form input {
   font-size: 16px;

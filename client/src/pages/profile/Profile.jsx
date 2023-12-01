@@ -1,28 +1,35 @@
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext.jsx";
+import { useForm } from "../../hooks/useForm.js";
 import "./profile.css";
 
 export default function Profile() {
+  const { username, userAvatar , onProfileUpdateHandler } = useContext(AuthContext);
+  const { values, changeHandler, onSubmit } = useForm({
+    username: username,
+    newAvatar: userAvatar,
+  }, onProfileUpdateHandler);
   return (
     <div className="profile">
       <div className="profileWrapper">
-        <div className="profileTitle">
-          <span className="profileUpdateTitle">Update your account</span>
-          <span className="profileDeleteTitle">Delete your account <i className="fa-solid fa-trash"></i></span>
-        </div>
-        <form className="profileForm">
+        <div className="profileTitle"></div>
+        <form className="profileForm" onSubmit={onSubmit}>
           <label>Profile Picture</label>
-          <img
-            className="profilePicture"
-            src="https://images.pexels.com/photos/2449605/pexels-photo-2449605.png?auto=compress&cs=tinysrgb&w=1600"
-            alt=""
-          />
-          <label >Profile Picture Url</label>
-          <input type="url" placeholder="Profile Picture Url" />
+          <img className="profilePicture" src={userAvatar} alt="" />
           <label>Username</label>
-          <input type="text" placeholder="Ayti" />
-          <label>Email</label>
-          <input type="text" placeholder="Ayti@abv.bg" />
-          <label>Password</label>
-          <input type="password" />
+          <input
+            type="text"
+            name="username"
+            defaultValue={username}
+            onChange={changeHandler}
+          />
+          <label>Profile Picture Url</label>
+          <input
+            type="url"
+            name="userAvatar"
+            defaultValue={userAvatar}
+            onChange={changeHandler}
+          />
           <button className="profileSubmit">Update</button>
         </form>
       </div>

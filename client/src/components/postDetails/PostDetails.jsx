@@ -93,14 +93,20 @@ export default function postDetails() {
 
 
 const onEditPhotoHandler = async (data) => {
-  const updatedPhoto = await photoApi.update(photoId,data)
+  console.log(photo)
+  const updateInfo= await photoApi.update(photoId,data)
+  const updatedPhoto = {
+    createdBy:photo.createdBy,
+    ...updateInfo
+  }
   setPhoto(updatedPhoto)
   setShowEdit(false)
 }
 
 
 
-  
+  console.log(photo)
+
 
   return (
     <>

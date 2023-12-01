@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext.jsx";
 export default function NavBar() {
-  const { isAuthenticated , userAvatar } = useContext(AuthContext);
+  const { isAuthenticated , userAvatar , username } = useContext(AuthContext);
   return (
     <div className="nav">
       <div className="navLeft">
@@ -54,6 +54,7 @@ export default function NavBar() {
       {/** css breaks if i put it on the first check */}
       {isAuthenticated && (
         <div className="navRight">
+            <p>Logged in as {username}</p>
           <ul className="wrapper">
             <img
               className="navImg"
