@@ -32,27 +32,65 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     try {
-      const user = await userApi.register(registerData);
+
+    {/** Register the user in server  */}
+      const userInitialInfo = await userApi.register(registerData);
+      {/** Set Token  so we can send authorized requests*/}
+      console.log(userInitialInfo)
+      localStorage.setItem("accessToken", userInitialInfo.accessToken);
+
+      {/** Create collection with user info so the user can change avatar & username later*/}
+      const user = await userApi.createProfile(userInitialInfo)
+
+      console.log(user)
 
       setAuth(user);
-      localStorage.setItem("accessToken", user.accessToken);
+
+
       navigate("/");
     } catch (error) {
       //TODO acceptable error message
       console.log(error);
     }
   };
-
   const onLogoutHandler = async () => {
     setAuth({});
     localStorage.removeItem("accessToken");
   };
 
+  const onProfileUpdateHandler = async (data) => {
+    const {username,newAvatar} = data
+    
+
+    const updatedProfile = {
+      userId: auth._ownerId,
+      username:username,
+      avatar:newAvatar,
+      email:auth.email,
+      accessToken:auth.accessToken
+    }
+    
+    try {
+      const updatedUser = await userApi.updateProfile(auth._id,updatedProfile)
+      setAuth(updatedUser)
+    }catch (error) {
+      console.log(error)
+      
+    }
+  }
+
+  console.log(auth)
+
+  
+
+  
+
   const contextValues = {
     onRegisterHandler,
     onLoginHandler,
     onLogoutHandler,
-    userId: auth._id,
+    onProfileUpdateHandler,
+    userId: auth._ownerId,
     username: auth.username,
     userAvatar: auth.avatar,
     email: auth.email,

@@ -1,5 +1,8 @@
 .registerForm {
   margin-top: -95px;
+  height: 30%;
+  border: none;
+  box-shadow: none;
 }
 
 .login {

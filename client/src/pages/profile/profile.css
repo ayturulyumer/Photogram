@@ -1,6 +1,7 @@
 .profile {
     display: flex;
-    background: radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%);
+    align-items: center;
+    height: 1200px;
 }
 
 .profileWrapper{
@@ -8,28 +9,16 @@
     padding: 20px;
 }
 
-.profileTitle{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
-.profileUpdateTitle{
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: lightcoral;
-}
 
-.profileDeleteTitle{
-    color: red;
-    font-size: 12px;
-    cursor: pointer;
-}
 
 .profileForm{
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    height: 1000px;
+    align-items: center;
+    box-shadow: none;
 }
 
 .profilePicture{
@@ -53,10 +42,11 @@
     height: 30px;
     border: none;
     border-bottom: 1px solid lightblue;
+    width: 300px;
 }
 
 .profileSubmit {
-    width: 150px;
+    width: 100px;
     align-self: center;
     border: none;
     border-radius: 10px;
