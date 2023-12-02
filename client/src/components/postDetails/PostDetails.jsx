@@ -21,6 +21,7 @@ export default function postDetails() {
 
   const { isAuthenticated, username, userAvatar, userId } =
     useContext(AuthContext);
+    
   {
     /** Another way to get photoId */
   }
@@ -65,7 +66,6 @@ export default function postDetails() {
         /** Show success message  */
       }
       setShowSuccess(true);
-
       {
         /** Redirect to catalog after 1.5 seconds  */
       }
@@ -96,7 +96,7 @@ const onEditPhotoHandler = async (data) => {
   console.log(photo)
   const updateInfo= await photoApi.update(photoId,data)
   const updatedPhoto = {
-    createdBy:photo.createdBy,
+    createdBy:username,
     ...updateInfo
   }
   setPhoto(updatedPhoto)
@@ -104,8 +104,6 @@ const onEditPhotoHandler = async (data) => {
 }
 
 
-
-  console.log(photo)
 
 
   return (
@@ -116,7 +114,7 @@ const onEditPhotoHandler = async (data) => {
         <DeletePhotoModal onClose={onClose} onDelete={onDeletePhotoHandler} />
       )}
 
-      {showSuccess && <SuccessMessageModal />}
+      {showSuccess && <SuccessMessageModal successMsg={"You successfully deleted the photo !"} />}
 
       <div className="postDetails">
         <div className="postDetailsWrapper">

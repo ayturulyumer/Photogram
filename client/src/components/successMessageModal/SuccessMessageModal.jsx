@@ -1,6 +1,6 @@
 import "./successMessageModal.css";
 
-export default function SuccessMessageModal() {
+export default function SuccessMessageModal({successMsg}) {
   return (
     <div className="backdrop">
     <div id="success_tic" className="modal fade" role="dialog">
@@ -9,7 +9,7 @@ export default function SuccessMessageModal() {
         <div className="modal-content">
           <div className="page-body">
             <div className="head">
-              <h3 style={{ marginTop: 5 }}>Successfully deleted photo</h3>
+              <h3 style={{ marginTop: 5 }}>{successMsg}</h3>
             </div>
             <h1 style={{ textAlign: "center" }}>
               <div className="checkmark-circle">

@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext.jsx";
 import "./dashboard.css";
 
+
 export default function Dashboard() {
+  const {userAvatar} = useContext(AuthContext)
+  
   return (
     <section className="h-100 gradient-custom-2">
     <div className="container py-5 h-100">
@@ -9,23 +14,23 @@ export default function Dashboard() {
           <div className="card">
             <div
               className="rounded-top text-white d-flex flex-row"
-              style={{ backgroundColor: "#000", height: 200 }}
+              style={{ backgroundColor: "#000", height: 160 }}
             >
               <div
                 className="ms-4 mt-5 d-flex flex-column"
-                style={{ width: 150 }}
+                style={{ width: 150, height:150}}
               >
                 <img
-                  src="https://buffer.com/cdn-cgi/image/w=7000,fit=contain,q=90,f=auto/library/content/images/2023/10/free-images.jpg"
+                  src={userAvatar}
                   alt="Generic placeholder image"
                   className="img-fluid img-thumbnail mt-4 mb-2"
-                  style={{ width: 150, zIndex: 1 }}
+                  style={{ width: 150, height:150, zIndex: 1 }}
                 />
                 <button
                   type="button"
                   className="btn btn-outline-dark"
                   data-mdb-ripple-color="dark"
-                  style={{ zIndex: 1 }}
+                  style={{ zIndex: 1 , color:"black" }}
                 >
                   Edit profile
                 </button>

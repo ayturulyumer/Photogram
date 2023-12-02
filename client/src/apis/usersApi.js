@@ -25,4 +25,5 @@ export const createProfile = async (data) => {
 export const updateProfile = async (id, data) => {
   const result = await request.put(`${collection}/${id}`,data);
   return result;
+  console
 };

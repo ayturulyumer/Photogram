@@ -26,7 +26,7 @@ export default function Profile() {
           <label>Profile Picture Url</label>
           <input
             type="url"
-            name="userAvatar"
+            name="newAvatar"
             defaultValue={userAvatar}
             onChange={changeHandler}
           />

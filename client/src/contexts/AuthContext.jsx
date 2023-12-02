@@ -60,6 +60,8 @@ export const AuthProvider = ({ children }) => {
 
   const onProfileUpdateHandler = async (data) => {
     const {username,newAvatar} = data
+
+    console.log(newAvatar)
     
 
     const updatedProfile = {
@@ -79,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  console.log(auth)
+
 
   
 
