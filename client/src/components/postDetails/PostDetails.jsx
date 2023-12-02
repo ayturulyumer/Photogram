@@ -96,12 +96,14 @@ const onEditPhotoHandler = async (data) => {
   console.log(photo)
   const updateInfo= await photoApi.update(photoId,data)
   const updatedPhoto = {
-    createdBy:username,
+    createdBy:photo.createdBy,
     ...updateInfo
   }
   setPhoto(updatedPhoto)
   setShowEdit(false)
 }
+
+
 
 
 
