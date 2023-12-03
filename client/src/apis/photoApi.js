@@ -19,7 +19,15 @@ export const remove = async (id) => {
   await request.del(`${baseUrl}/${id}`);
 };
 
-export const update = async (id,data) => {
-  const result = await request.put(`${baseUrl}/${id}`,data);
+export const update = async (id, data) => {
+  const result = await request.put(`${baseUrl}/${id}`, data);
+  return result;
+};
+
+export const getByOwner = async (ownerId) => {
+  const response = await request.get(
+    `${baseUrl}?where=_ownerId%3D%22${ownerId}%22`
+  );
+  const result = Object.values(response);
   return result;
 };

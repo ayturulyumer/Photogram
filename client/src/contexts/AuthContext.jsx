@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const onLoginHandler = async (data) => {
     try {
       const user = await userApi.login(data);
+      console.log(user)
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
       navigate("/");
@@ -36,13 +37,14 @@ export const AuthProvider = ({ children }) => {
     {/** Register the user in server  */}
       const userInitialInfo = await userApi.register(registerData);
       {/** Set Token  so we can send authorized requests*/}
-      console.log(userInitialInfo)
+    
       localStorage.setItem("accessToken", userInitialInfo.accessToken);
 
       {/** Create collection with user info so the user can change avatar & username later*/}
       const user = await userApi.createProfile(userInitialInfo)
-
       console.log(user)
+
+
 
       setAuth(user);
 
