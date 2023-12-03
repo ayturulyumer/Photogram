@@ -22,11 +22,17 @@
   width: 300px;
 }
 
-.photoRows {
-  margin-top: 10px;
-  margin-left: 120px;
-  flex: 9;
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 10px;
+
+
+
+.no-photos p{
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+
+.no-photos img{
+  height: 200px;
+  width: 200px;
+  margin-left: 38%;
 }

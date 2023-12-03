@@ -57,7 +57,7 @@ const rows = transformRowsMatrix(myPhotos)
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <p className="mb-1 h5">4</p>
+                    <p className="mb-1 h5">{myPhotos.length}</p>
                     <p className="small text-muted mb-0">Photos</p>
                   </div>
                   <div className="px-3">
@@ -90,8 +90,13 @@ const rows = transformRowsMatrix(myPhotos)
                   </div>
                   ))}
                 </div>
-
                 ))}
+                {myPhotos.length === 0 && (
+                <div className="no-photos">
+                <p>Your gallery looks lonely</p>
+                <img src="https://png.pngtree.com/png-clipart/20200225/original/pngtree-sad-ghost-illustration-vector-on-white-background-png-image_5293174.jpg" />
+                </div>
+              )}
               </div>
             </div>
           </div>
