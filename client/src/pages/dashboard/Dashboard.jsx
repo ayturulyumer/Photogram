@@ -17,7 +17,7 @@ export default function Dashboard() {
       .catch((err) => console.log(err));
   }, [userId]);
 
-  console.log(myPhotos);
+
 
 
 {/** Create matrix with 2 elements in it */}

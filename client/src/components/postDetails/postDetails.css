@@ -1,5 +1,3 @@
-
-
 .postDetailsWrapper {
   width: 50%;
   margin: 0 auto;
@@ -64,7 +62,19 @@
   border: none;
 }
 
-.d-flex.flex-column.comment-section{
+.d-flex.flex-column.comment-section {
   background-color: black !important;
   border: none;
 }
+
+
+body {
+  background: #000000;
+}
+
+
+span {
+  cursor: auto;
+}
+
+

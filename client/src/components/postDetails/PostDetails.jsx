@@ -21,7 +21,7 @@ export default function postDetails() {
 
   const { isAuthenticated, username, userAvatar, userId } =
     useContext(AuthContext);
-    
+
   {
     /** Another way to get photoId */
   }
@@ -31,8 +31,9 @@ export default function postDetails() {
   const { photoId } = useParams();
   const navigate = useNavigate();
 
-
-{/**Get the photo and comments  */}
+  {
+    /**Get the photo and comments  */
+  }
   useEffect(() => {
     photoApi
       .getSingle(photoId)
@@ -78,7 +79,6 @@ export default function postDetails() {
     }
   };
 
-
   const onCommentSubmit = async ({ text }) => {
     const newComment = await commentsApi.create(
       photoId,
@@ -89,34 +89,36 @@ export default function postDetails() {
     setComments((state) => [newComment, ...state]);
   };
 
-
-
-
-const onEditPhotoHandler = async (data) => {
-  console.log(photo)
-  const updateInfo= await photoApi.update(photoId,data)
-  const updatedPhoto = {
-    createdBy:photo.createdBy,
-    ...updateInfo
-  }
-  setPhoto(updatedPhoto)
-  setShowEdit(false)
-}
-
-
-
-
-
+  const onEditPhotoHandler = async (data) => {
+    console.log(photo);
+    const updateInfo = await photoApi.update(photoId, data);
+    const updatedPhoto = {
+      createdBy: photo.createdBy,
+      ...updateInfo,
+    };
+    setPhoto(updatedPhoto);
+    setShowEdit(false);
+  };
 
   return (
     <>
-      {showEdit && <EditPhotoModal onClose={onClose} photoDetails={photo} onEdit={onEditPhotoHandler} />}
+      {showEdit && (
+        <EditPhotoModal
+          onClose={onClose}
+          photoDetails={photo}
+          onEdit={onEditPhotoHandler}
+        />
+      )}
 
       {showDelete && (
         <DeletePhotoModal onClose={onClose} onDelete={onDeletePhotoHandler} />
       )}
 
-      {showSuccess && <SuccessMessageModal successMsg={"You successfully deleted the photo !"} />}
+      {showSuccess && (
+        <SuccessMessageModal
+          successMsg={"You successfully deleted the photo !"}
+        />
+      )}
 
       <div className="postDetails">
         <div className="postDetailsWrapper">
@@ -136,6 +138,7 @@ const onEditPhotoHandler = async (data) => {
                 ></i>
               </div>
             )}
+           
           </h1>
           <div className="postDetailsInfo">
             <span className="postDetailsAuthor">

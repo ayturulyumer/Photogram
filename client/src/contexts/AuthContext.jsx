@@ -14,8 +14,14 @@ export const AuthProvider = ({ children }) => {
 
   const onLoginHandler = async (data) => {
     try {
-      const user = await userApi.login(data);
-      console.log(user)
+      const userInitialInfo = await userApi.login(data);
+    
+      {/** Returns array of objects */}
+      const returnedUser = await userApi.getByOwner(userInitialInfo._id)
+      
+      {/**There is only one user created by the ownerId , so i'm setting it as the auth */}
+      const user = returnedUser[0]
+
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
       navigate("/");
@@ -39,6 +45,7 @@ export const AuthProvider = ({ children }) => {
       {/** Set Token  so we can send authorized requests*/}
     
       localStorage.setItem("accessToken", userInitialInfo.accessToken);
+      console.log(userInitialInfo)
 
       {/** Create collection with user info so the user can change avatar & username later*/}
       const user = await userApi.createProfile(userInitialInfo)

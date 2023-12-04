@@ -15,8 +15,10 @@
     rgba(251, 194, 235, 1),
     rgba(166, 193, 238, 1)
   );
+  
 }
 
+/*User Avatar */
 .w-100 {
   height: 300px;
   width: 300px;
