@@ -16,6 +16,7 @@ import AuthenticationGuard from "./components/guards/AuthenticationGuard.jsx";
 import "./app.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NotFound from "./pages/notFound/NotFound.jsx";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path="/logout" element={<Logout />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
           <Footer />
         </AuthProvider>
