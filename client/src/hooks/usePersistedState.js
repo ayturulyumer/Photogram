@@ -14,18 +14,14 @@ export default function usePersistedState(key, defaultValue) {
   const setPersistedState = (value) => {
     setState(value);
     let serializedValue;
-    if(typeof value === "function"){
-      serializedValue = JSON.stringify(value(state))
+    if (typeof value === "function") {
+      serializedValue = JSON.stringify(value(state));
     } else {
-        serializedValue = JSON.stringify(value)
+      serializedValue = JSON.stringify(value);
     }
 
-    localStorage.setItem(key,serializedValue)
-  }
-  
+    localStorage.setItem(key, serializedValue);
+  };
 
-  return [
-    state,
-    setPersistedState
-  ]
+  return [state, setPersistedState];
 }

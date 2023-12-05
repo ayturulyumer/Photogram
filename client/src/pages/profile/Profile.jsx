@@ -2,37 +2,49 @@ import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext.jsx";
 import { useForm } from "../../hooks/useForm.js";
 import "./profile.css";
+import SuccessMessageModal from "../../components/successMessageModal/successMessageModal.jsx";
 
 export default function Profile() {
-  const { username, userAvatar , onProfileUpdateHandler } = useContext(AuthContext);
-  const { values, changeHandler, onSubmit } = useForm({
-    username: username,
-    newAvatar: userAvatar,
-  }, onProfileUpdateHandler);
+  const { username, userAvatar, onProfileUpdateHandler, showSuccessMessage } =
+    useContext(AuthContext);
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      username: username,
+      newAvatar: userAvatar,
+    },
+    onProfileUpdateHandler
+  );
   return (
-    <div className="profile">
-      <div className="profileWrapper">
-        <div className="profileTitle"></div>
-        <form className="profileForm" onSubmit={onSubmit}>
-          <label>Profile Picture</label>
-          <img className="profilePicture" src={userAvatar} alt="" />
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            defaultValue={username}
-            onChange={changeHandler}
-          />
-          <label>Profile Picture Url</label>
-          <input
-            type="url"
-            name="newAvatar"
-            defaultValue={userAvatar}
-            onChange={changeHandler}
-          />
-          <button className="profileSubmit">Update</button>
-        </form>
+    <>
+     {showSuccessMessage && (
+        <SuccessMessageModal
+          successMsg={"Profile updated successfully!"}
+        />
+      )}
+      <div className="profile">
+        <div className="profileWrapper">
+          <div className="profileTitle"></div>
+          <form className="profileForm" onSubmit={onSubmit}>
+            <label>Profile Picture</label>
+            <img className="profilePicture" src={userAvatar} alt="" />
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              defaultValue={username}
+              onChange={changeHandler}
+            />
+            <label>Profile Picture Url</label>
+            <input
+              type="url"
+              name="newAvatar"
+              defaultValue={userAvatar}
+              onChange={changeHandler}
+            />
+            <button className="profileSubmit">Update</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

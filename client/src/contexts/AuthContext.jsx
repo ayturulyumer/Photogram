@@ -7,18 +7,23 @@ import usePersistedState from "../hooks/usePersistedState.js";
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Sets authorization
-  const [auth, setAuth] = usePersistedState("auth",{})
+  const [auth, setAuth] = usePersistedState("auth", {});
+  const [showSuccessMessage, setSuccessMessage] = useState(false);
   const navigate = useNavigate();
 
   const onLoginHandler = async (data) => {
     try {
       const userInitialInfo = await userApi.login(data);
-    
-      {/** Returns array of objects */}
-      const returnedUser = await userApi.getByOwner(userInitialInfo._id)
-      
-      {/**There is only one user created by the ownerId , so i'm setting it as the auth */}
-      const user = returnedUser[0]
+
+      {
+        /** Returns array of objects */
+      }
+      const returnedUser = await userApi.getByOwner(userInitialInfo._id);
+
+      {
+        /**There is only one user created by the ownerId , so i'm setting it as the auth */
+      }
+      const user = returnedUser[0];
 
       setAuth(user);
       localStorage.setItem("accessToken", user.accessToken);
@@ -37,24 +42,25 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     try {
-
-    {/** Register the user in server  */}
+      {
+        /** Register the user in server  */
+      }
       const userInitialInfo = await userApi.register(registerData);
-      {/** Set Token  so we can send authorized requests*/}
-    
+      {
+        /** Set Token  so we can send authorized requests*/
+      }
+
       localStorage.setItem("accessToken", userInitialInfo.accessToken);
-      console.log(userInitialInfo)
 
-      {/** Create collection with user info so the user can change avatar & username later*/}
-      const user = await userApi.createProfile(userInitialInfo)
-      console.log(user)
-
-
+      {
+        /** Create collection with user info so the user can change avatar & username later if he/she wants to*/
+      }
+      const user = await userApi.createProfile(userInitialInfo);
 
       setAuth(user);
-
-
-      navigate("/");
+      setSuccessMessage(true);
+      setTimeout(() => setSuccessMessage(false), 1500);
+      setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       //TODO acceptable error message
       console.log(error);
@@ -66,31 +72,26 @@ export const AuthProvider = ({ children }) => {
   };
 
   const onProfileUpdateHandler = async (data) => {
-    const {username,newAvatar} = data
-    
+    const { username, newAvatar } = data;
 
     const updatedProfile = {
       userId: auth._ownerId,
-      username:username,
-      avatar:newAvatar,
-      email:auth.email,
-      accessToken:auth.accessToken
-    }
-    
+      username: username,
+      avatar: newAvatar,
+      email: auth.email,
+      accessToken: auth.accessToken,
+    };
+
     try {
-      const updatedUser = await userApi.updateProfile(auth._id,updatedProfile)
-      setAuth(updatedUser)
-    }catch (error) {
-      console.log(error)
-      
+      const updatedUser = await userApi.updateProfile(auth._id, updatedProfile);
+      setAuth(updatedUser);
+      setSuccessMessage(true);
+      setTimeout(() => setSuccessMessage(false), 1500);
+      setTimeout(() => navigate("/dashboard"), 1500);
+    } catch (error) {
+      console.log(error);
     }
-  }
-
-
-
-  
-
-  
+  };
 
   const contextValues = {
     onRegisterHandler,
@@ -103,6 +104,7 @@ export const AuthProvider = ({ children }) => {
     email: auth.email,
     token: auth.accessToken,
     isAuthenticated: !!auth.accessToken,
+    showSuccessMessage: showSuccessMessage,
   };
 
   return (

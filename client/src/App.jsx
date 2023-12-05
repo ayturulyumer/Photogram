@@ -10,6 +10,9 @@ import Register from "./pages/register/Register.jsx";
 import Login from "./pages/login/Login.jsx";
 import Logout from "./pages/logout/Logout.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import LoggedUserGuard from "./components/guards/LoggedUserGuard.jsx";
+import AuthorizationGuard from "./components/guards/AuthorizationGuard.jsx";
+import AuthenticationGuard from "./components/guards/AuthenticationGuard.jsx";
 import "./app.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -23,13 +26,22 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/photos" element={<Photos />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/create" element={<CreatePhoto />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/photo/details/:photoId" element={<Details />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route element={<LoggedUserGuard />}>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+
+            <Route element={<AuthorizationGuard />}>
+              <Route path="/photo/details/:photoId" element={<Details />} />
+            </Route>
+
+            <Route element={<AuthenticationGuard />}>
+              <Route path="/create" element={<CreatePhoto />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
           </Routes>
           <Footer />
         </AuthProvider>
