@@ -60,6 +60,12 @@ export default function postDetails() {
   };
 
   const onDeletePhotoHandler = async () => {
+    {
+      /** If current user is not owner */
+    }
+    if (photo._ownerId != userId) {
+      navigate(`/photo/details/${photoId}`);
+    }
     try {
       await photoApi.remove(photoId);
 
@@ -90,14 +96,20 @@ export default function postDetails() {
   };
 
   const onEditPhotoHandler = async (data) => {
-    console.log(photo);
-    const updateInfo = await photoApi.update(photoId, data);
-    const updatedPhoto = {
-      createdBy: photo.createdBy,
-      ...updateInfo,
-    };
-    setPhoto(updatedPhoto);
-    setShowEdit(false);
+    if(photo._ownerId != userId){
+      navigate(`/photo/details/${photoId}`)
+    }
+    try {
+      const updateInfo = await photoApi.update(photoId, data);
+      const updatedPhoto = {
+        createdBy: photo.createdBy,
+        ...updateInfo,
+      };
+      setPhoto(updatedPhoto);
+      setShowEdit(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -116,7 +128,7 @@ export default function postDetails() {
 
       {showSuccess && (
         <SuccessMessageModal
-          successMsg={"You successfully deleted the photo !"}
+          successMsg={"You successfully deleted the photo!"}
         />
       )}
 
@@ -138,7 +150,6 @@ export default function postDetails() {
                 ></i>
               </div>
             )}
-           
           </h1>
           <div className="postDetailsInfo">
             <span className="postDetailsAuthor">

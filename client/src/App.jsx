@@ -32,9 +32,7 @@ function App() {
               <Route path="/login" element={<Login />} />
             </Route>
 
-            <Route element={<AuthorizationGuard />}>
               <Route path="/photo/details/:photoId" element={<Details />} />
-            </Route>
 
             <Route element={<AuthenticationGuard />}>
               <Route path="/create" element={<CreatePhoto />} />
