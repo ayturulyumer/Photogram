@@ -57,7 +57,7 @@ export default function Comment({
                   />
                   <div className="post-comments">
                     <p className="meta">
-                      {formatDateWithNamedDayAndMonth(_createdOn)} <a href="#">{username}</a> says :{" "}
+                      {formatDateWithNamedDayAndMonth(_createdOn)} <span style={{color:"black",textDecoration:"underline"}}>{username}</span> says :{" "}
                     </p>
                     <p>
                      {text}

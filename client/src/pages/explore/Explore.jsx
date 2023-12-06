@@ -7,19 +7,26 @@ import * as exploreApi from "../../apis/exploreApi.js"
 export default function Discover() {
   const [explorePhotos,setExplorePhotos] = useState([])
   const [loading,setShowLoading] = useState(false)
+  const [query,setQuery] = useState("nature")
   useEffect(() => {
     setShowLoading(true)
     exploreApi
-    .getPhotos()
+    .getPhotos(query)
     .then(data => setExplorePhotos(data.photos))
     .catch(err => console.log(err))
     .finally(() => setShowLoading(false))
-  },[])
+  },[query])
 
+  const onSearchHandler = async (data) => {
+   const {searchInput} = {...data}
+    setQuery(searchInput)
+  }
+
+  console.log(explorePhotos)
 
   return (
     <>
-      <SearchBar />
+      <SearchBar  onSearchHandler={onSearchHandler}/>
       <div className="explore-posts">
         {loading && <Loader/>}
         {explorePhotos.map((photo) =>(
