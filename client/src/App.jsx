@@ -9,6 +9,7 @@ import Profile from "./pages/profile/Profile.jsx";
 import Register from "./pages/register/Register.jsx";
 import Login from "./pages/login/Login.jsx";
 import Logout from "./pages/logout/Logout.jsx";
+import Explore from "./pages/explore/Explore.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import LoggedUserGuard from "./components/guards/LoggedUserGuard.jsx";
 import AuthorizationGuard from "./components/guards/AuthorizationGuard.jsx";
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/photos" element={<Photos />} />
+            <Route path="/explore" element={<Explore/>}/>
 
             <Route element={<LoggedUserGuard />}>
               <Route path="/register" element={<Register />} />
