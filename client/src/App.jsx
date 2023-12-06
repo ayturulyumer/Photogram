@@ -12,7 +12,6 @@ import Logout from "./pages/logout/Logout.jsx";
 import Explore from "./pages/explore/Explore.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import LoggedUserGuard from "./components/guards/LoggedUserGuard.jsx";
-import AuthorizationGuard from "./components/guards/AuthorizationGuard.jsx";
 import AuthenticationGuard from "./components/guards/AuthenticationGuard.jsx";
 import "./app.css";
 

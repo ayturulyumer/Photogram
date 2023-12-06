@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
       {
         /** Set Token  so we can send authorized requests*/
       }
+      console.log(userInitialInfo)
 
       localStorage.setItem("accessToken", userInitialInfo.accessToken);
 
