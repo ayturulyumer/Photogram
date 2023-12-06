@@ -1,6 +1,6 @@
 import "./searchbar.css";
 import { useForm } from "../../hooks/useForm.js";
-export default function SearchBar({onSearchHandler}) {
+export default function SearchBar({ onSearchHandler }) {
   const { values, changeHandler, onSubmit } = useForm(
     {
       searchInput: "",

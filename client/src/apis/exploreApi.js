@@ -7,6 +7,6 @@ const query = 'Nature';
 
 
 export const getPhotos = async (query) => {
-   const result = await client.photos.search({ query, per_page: 12, });
+   const result = await client.photos.search({ query, per_page:32, });
    return result
 }
