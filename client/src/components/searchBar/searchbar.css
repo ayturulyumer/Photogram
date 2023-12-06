@@ -6,6 +6,7 @@ body {
 
 .search {
   width: 30%;
+  height: 5px;
   position: relative;
   display: flex;
   margin-top: 20px;

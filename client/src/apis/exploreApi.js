@@ -1,3 +1,12 @@
-const baseUrl = "https://api.pexels.com/v1/search";
-const apiKey = "WXxy0Xfe6x6OulNE3yvVYpeuYLAPtgCBIxQoG2aIQ9xnzqjltEKXdXqn"
-import * as request from "../lib/request.js";
+import { createClient } from 'pexels';
+
+const client = createClient('WXxy0Xfe6x6OulNE3yvVYpeuYLAPtgCBIxQoG2aIQ9xnzqjltEKXdXqn');
+const query = 'Nature';
+
+
+
+
+export const getPhotos = async () => {
+   const result = await client.photos.search({ query, per_page: 12, });
+   return result
+}

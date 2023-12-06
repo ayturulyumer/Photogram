@@ -1,23 +1,42 @@
 import "./explore.css";
 import SearchBar from "../../components/searchBar/SearchBar.jsx";
+import Loader from "../../components/loader/Loader.jsx";
+import { useEffect, useState } from "react";
+import * as exploreApi from "../../apis/exploreApi.js"
+
 export default function Discover() {
+  const [explorePhotos,setExplorePhotos] = useState([])
+  const [loading,setShowLoading] = useState(false)
+  useEffect(() => {
+    setShowLoading(true)
+    exploreApi
+    .getPhotos()
+    .then(data => setExplorePhotos(data.photos))
+    .catch(err => console.log(err))
+    .finally(() => setShowLoading(false))
+  },[])
+
+
   return (
     <>
       <SearchBar />
       <div className="explore-posts">
-        <div className="Post">
+        {loading && <Loader/>}
+        {explorePhotos.map((photo) =>(
+        <div className="Post" key={photo.id}>
           <img
             className="PostImg"
-            src="https://images.pexels.com/photos/46505/swiss-shepherd-dog-dog-pet-portrait-46505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="dog"
+            src={photo.src.original}
+            alt={photo.alt}
           />
           <div className="PostInfo">
-            <span className="PostTitle">Dog</span>
+            <span className="PostTitle">{photo.alt}</span>
             <hr className="PostLine" />
-            <span className="PostDate">Monday,12,2023</span>
+            <span className="PostDate">{photo.photographer}</span>
           </div>
-          <p className="PostDescription">nice dog</p>
         </div>
+     
+    ))}
         
         <button className="load-more">Load More</button>
       </div>
