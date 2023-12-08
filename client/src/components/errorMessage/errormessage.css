@@ -1,0 +1,15 @@
+.errorMsg {
+  font-family: '"Raleway", sans-serif';
+  font-weight: 900;
+  font-size: 16px;
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 0px 40px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  color: #d8000c;
+  background-color: #ffbaba;
+  background-image: url("../../assets/error.png");
+  width: 360px;
+}

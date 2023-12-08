@@ -9,12 +9,12 @@ export const AuthProvider = ({ children }) => {
   // Sets authorization
   const [auth, setAuth] = usePersistedState("auth", {});
   const [showSuccessMessage, setSuccessMessage] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const onLoginHandler = async (data) => {
     try {
       const userInitialInfo = await userApi.login(data);
-
       {
         /** Returns array of objects */
       }
@@ -26,11 +26,10 @@ export const AuthProvider = ({ children }) => {
       const user = returnedUser[0];
 
       setAuth(user);
-    
+      setError("");
       navigate("/");
     } catch (error) {
-      // TODO acceptable error message
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -39,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     // TODO : Add proper error message
 
     if (repeatPassword != registerData.password) {
-      return;
+      return setError({ message: "Passwords do not match !" });
     }
     try {
       {
@@ -57,17 +56,21 @@ export const AuthProvider = ({ children }) => {
       }
       const user = await userApi.createProfile(userInitialInfo);
 
-      {/** Remove the accessToken from localStorage as we don't need it anymore  */}
-      localStorage.removeItem("accessToken")
-      
-      
+      {
+        /** Remove the accessToken from localStorage as we don't need it anymore  */
+      }
+      localStorage.removeItem("accessToken");
+
       setAuth(user);
+
       setSuccessMessage(true);
+
+      setError("");
       setTimeout(() => setSuccessMessage(false), 1500);
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       //TODO acceptable error message
-      console.log(error);
+      setError(error);
     }
   };
   const onLogoutHandler = async () => {
@@ -76,7 +79,6 @@ export const AuthProvider = ({ children }) => {
 
   const onProfileUpdateHandler = async (data) => {
     const { username, newAvatar } = data;
-    console.log(auth.accessToken)
 
     const updatedProfile = {
       userId: auth._ownerId,
@@ -90,7 +92,7 @@ export const AuthProvider = ({ children }) => {
       const updatedUser = await userApi.updateProfile(auth._id, updatedProfile);
       setAuth(updatedUser);
       setSuccessMessage(true);
-      setTimeout(() => setSuccessMessage(false), 1500);
+      setTimeout(() => setSuccessMessage(false), 3000);
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
       console.log(error);
@@ -109,6 +111,7 @@ export const AuthProvider = ({ children }) => {
     token: auth.accessToken,
     isAuthenticated: !!auth.accessToken,
     showSuccessMessage: showSuccessMessage,
+    errorMessage: error.message,
   };
 
   return (
