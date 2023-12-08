@@ -27,14 +27,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/photos" element={<Photos />} />
-            <Route path="/explore" element={<Explore/>}/>
+            <Route path="/explore" element={<Explore />} />
 
             <Route element={<LoggedUserGuard />}>
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
             </Route>
 
-              <Route path="/photo/details/:photoId" element={<Details />} />
+            <Route path="/photo/details/:photoId" element={<Details />} />
 
             <Route element={<AuthenticationGuard />}>
               <Route path="/create" element={<CreatePhoto />} />
@@ -42,7 +42,7 @@ function App() {
               <Route path="/logout" element={<Logout />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
-            <Route path="*" element={<NotFound/>}/>
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </AuthProvider>

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as photoApi from "../../apis/photoApi.js";
 import * as commentsApi from "../../apis/commentsApi.js";
+import * as likesApi from "../../apis/likesApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 import Comment from "../comments/Comment.jsx";
 import Likes from "../likes/Likes.jsx";
@@ -19,8 +20,9 @@ export default function postDetails() {
   const [showDelete, setShowDelete] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-
-
+  const [liked, setIsLiked] = useState(false);
+  const [photoLikes, setPhotoLikes] = useState(0);
+  const [isAlreadyLiked, setIsAlreadyLiked] = useState(0);
 
   const { isAuthenticated, username, userAvatar, userId } =
     useContext(AuthContext);
@@ -35,7 +37,7 @@ export default function postDetails() {
   const navigate = useNavigate();
 
   {
-    /**Get the photo and comments  */
+    /**Get the photo & comments & likes  */
   }
   useEffect(() => {
     photoApi
@@ -48,8 +50,18 @@ export default function postDetails() {
       .then((result) => setComments(result))
       .catch((err) => console.log(err));
 
+    likesApi
+      .getPhotoLikes(photoId)
+      .then((result) => setPhotoLikes(result))
+      .catch((err) => console.log(err));
+
+    likesApi
+      .getIsAlreadyLiked(photoId, userId)
+      .then((result) => setIsAlreadyLiked(result))
+      .catch((err) => console.log(err));
   }, [photoId]);
 
+  console.log(isAlreadyLiked);
   const editPhotoClickHandler = () => {
     setShowEdit(true);
   };
@@ -116,13 +128,20 @@ export default function postDetails() {
     }
   };
 
-  const likePhotoClickHandler = async () => {
-     setLikeCount(likeCount + 1)
-     await likesApi.like(photoId,likeCount)
-     setIsLiked((current) => !current)
-     const likes = await likesApi.getLikes(photoId)
-     console.log(likes)
+  const photoLikeHandler = async () => {
+    if (isAlreadyLiked) {
+      alert("YOU LIKED IT BROO");
+      return;
     }
+    try {
+      await likesApi.like(photoId);
+      setPhotoLikes(photoLikes + 1);
+      setIsAlreadyLiked(1);
+      setIsLiked((current) => !current);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -146,11 +165,20 @@ export default function postDetails() {
 
       <div className="postDetails">
         <div className="postDetailsWrapper">
-          <img className="postDetailsImg" src={photo.imageUrl} alt={photo.title} />
+          <img
+            className="postDetailsImg"
+            src={photo.imageUrl}
+            alt={photo.title}
+          />
           <h1 className="postDetailsTitle">
             {photo.title}
             {userId && (
-              <Likes/>
+              <Likes
+                isLiked={liked}
+                onLike={photoLikeHandler}
+                likes={photoLikes}
+                alreadyLiked={isAlreadyLiked}
+              />
             )}
             {/** IF it's owner show edit buttons */}
             {userId && userId === photo._ownerId && (
