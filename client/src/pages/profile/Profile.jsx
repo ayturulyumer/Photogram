@@ -3,9 +3,10 @@ import AuthContext from "../../contexts/AuthContext.jsx";
 import { useForm } from "../../hooks/useForm.js";
 import "./profile.css";
 import SuccessMessageModal from "../../components/successMessageModal/successMessageModal.jsx";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage.jsx";
 
 export default function Profile() {
-  const { username, userAvatar, onProfileUpdateHandler, showSuccessMessage } =
+  const { username, userAvatar, onProfileUpdateHandler, showSuccessMessage , errorMessage} =
     useContext(AuthContext);
   const { values, changeHandler, onSubmit } = useForm(
     {
@@ -25,6 +26,7 @@ export default function Profile() {
         <div className="profileWrapper">
           <div className="profileTitle"></div>
           <form className="profileForm" onSubmit={onSubmit}>
+       {errorMessage && <ErrorMessage message={errorMessage}/>}
             <label>Profile Picture</label>
             <img className="profilePicture" src={userAvatar} alt="" />
             <label>Username</label>

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import * as userApi from "../apis/usersApi.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
-
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Sets authorization
@@ -12,6 +11,8 @@ export const AuthProvider = ({ children }) => {
   const [showSuccessMessage, setSuccessMessage] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+
 
   const onLoginHandler = async (data) => {
     try {
@@ -36,23 +37,27 @@ export const AuthProvider = ({ children }) => {
 
   const onRegisterHandler = async (data) => {
     const { repeatPassword, ...registerData } = data;
- 
-    const validEmail =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if(!registerData.username){
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!registerData.username) {
       return setError({ message: "Username is missing !" });
     } else if (registerData.username < 3) {
-      return setError({ message: "Username must be at least 3 characters long" });
+      return setError({
+        message: "Username must be at least 3 characters long",
+      });
     }
-    
-    if(!validEmail.test(registerData.email)){
+
+    if (!validEmail.test(registerData.email)) {
       return setError({ message: "Please enter valid email !" });
     }
 
     if (repeatPassword != registerData.password) {
       return setError({ message: "Passwords do not match !" });
-    } else if (registerData.password < 4 ){
-      return setError({ message: "Password must be at least 4 characters long" });
+    } else if (registerData.password < 4) {
+      return setError({
+        message: "Password must be at least 4 characters long",
+      });
     }
 
     try {
@@ -84,7 +89,6 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => setSuccessMessage(false), 1500);
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
-      //TODO acceptable error message
       setError(error);
     }
   };
@@ -94,6 +98,26 @@ export const AuthProvider = ({ children }) => {
 
   const onProfileUpdateHandler = async (data) => {
     const { username, newAvatar } = data;
+
+    const validAvatar = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+
+    if (!newAvatar) {
+      setError({ message: "Profile image url is missing" });
+      return setTimeout(() => setError(""), 5000);
+    } else if (!validAvatar.test(newAvatar)) {
+      setError({
+        message:
+          "Please enter a valid HTTP or HTTPS image URL",
+      });
+      return setTimeout(() => setError(""), 5000);
+    }
+    if (!username) {
+      setError({ message: "Username is missing" });
+      return setTimeout(() => setError(""), 5000);
+    } else if (username.length < 3) {
+      setError({ message: "Username must be at least 3 characters long" });
+      return setTimeout(() => setError(""), 5000);
+    }
 
     const updatedProfile = {
       userId: auth._ownerId,
@@ -110,7 +134,7 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => setSuccessMessage(false), 3000);
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
