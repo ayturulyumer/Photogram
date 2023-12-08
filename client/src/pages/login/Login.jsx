@@ -4,11 +4,12 @@ import { inputValidator } from "../../hooks/inputValidator.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext.jsx";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage.jsx";
 
 export default function Login() {
-  const { onLoginHandler} = useContext(AuthContext);
+  const { onLoginHandler ,errorMessage} = useContext(AuthContext);
 
-  const { error, input, validateInput } = inputValidator();
+  const { error, input, validateInput  ,} = inputValidator();
 
   const { values, changeHandler, onSubmit } = useForm(
     {
@@ -17,14 +18,16 @@ export default function Login() {
     },
     onLoginHandler
   );
+
   return (
-    
+      <>
       <div className="parent clearfix">
         <div className="bg-illustration"></div>
         <div className="login">
           <div className="container">
             <h1>Login with your account</h1>
             <div className="login-form">
+      {errorMessage && <ErrorMessage message={errorMessage}/>}
               <form method="POST" onSubmit={onSubmit}>
                 <label>Email</label>
                 <input
@@ -59,5 +62,6 @@ export default function Login() {
           </div>
         </div>
       </div>
+      </>
   );
 }
