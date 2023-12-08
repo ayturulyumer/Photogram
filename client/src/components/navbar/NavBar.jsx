@@ -89,10 +89,6 @@ export default function NavBar() {
               </Link>
             </ul>
           </ul>
-          <i
-            className="navSearchIcon fa-solid fa-magnifying-glass fa-xl"
-            style={{ color: "#000000" }}
-          ></i>
         </div>
       )}
     </div>

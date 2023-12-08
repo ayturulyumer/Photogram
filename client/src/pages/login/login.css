@@ -58,7 +58,7 @@ img {
 .bg-illustration {
   border-radius: 5px;
   position: relative;
-  height: 90vh;
+  height: 100vh;
   width: 1194px;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
