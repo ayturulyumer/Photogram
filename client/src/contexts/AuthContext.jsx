@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as userApi from "../apis/usersApi.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
+
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Sets authorization
@@ -35,11 +36,25 @@ export const AuthProvider = ({ children }) => {
 
   const onRegisterHandler = async (data) => {
     const { repeatPassword, ...registerData } = data;
-    // TODO : Add proper error message
+ 
+    const validEmail =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!registerData.username){
+      return setError({ message: "Username is missing !" });
+    } else if (registerData.username < 3) {
+      return setError({ message: "Username must be at least 3 characters long" });
+    }
+    
+    if(!validEmail.test(registerData.email)){
+      return setError({ message: "Please enter valid email !" });
+    }
 
     if (repeatPassword != registerData.password) {
       return setError({ message: "Passwords do not match !" });
+    } else if (registerData.password < 4 ){
+      return setError({ message: "Password must be at least 4 characters long" });
     }
+
     try {
       {
         /** Register the user in server  */
