@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       const user = returnedUser[0];
 
       setAuth(user);
-      localStorage.setItem("accessToken", user.accessToken);
+    
       navigate("/");
     } catch (error) {
       // TODO acceptable error message
@@ -57,6 +57,10 @@ export const AuthProvider = ({ children }) => {
       }
       const user = await userApi.createProfile(userInitialInfo);
 
+      {/** Remove the accessToken from localStorage as we don't need it anymore  */}
+      localStorage.removeItem("accessToken")
+      
+      
       setAuth(user);
       setSuccessMessage(true);
       setTimeout(() => setSuccessMessage(false), 1500);
@@ -68,11 +72,11 @@ export const AuthProvider = ({ children }) => {
   };
   const onLogoutHandler = async () => {
     setAuth({});
-    localStorage.removeItem("accessToken");
   };
 
   const onProfileUpdateHandler = async (data) => {
     const { username, newAvatar } = data;
+    console.log(auth.accessToken)
 
     const updatedProfile = {
       userId: auth._ownerId,

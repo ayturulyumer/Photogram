@@ -4,6 +4,7 @@ import * as photoApi from "../../apis/photoApi.js";
 import * as commentsApi from "../../apis/commentsApi.js";
 import formatDateWithNamedDayAndMonth from "../../utils/dateFormatter.js";
 import Comment from "../comments/Comment.jsx";
+import Likes from "../likes/Likes.jsx";
 import DeletePhotoModal from "../deletePhotoModal/DeletePhotoModal.jsx";
 import EditPhotoModal from "../editPhotoModal/EditPhotoModal.jsx";
 import SuccessMessageModal from "../successMessageModal/successMessageModal.jsx";
@@ -18,6 +19,8 @@ export default function postDetails() {
   const [showDelete, setShowDelete] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+
+
 
   const { isAuthenticated, username, userAvatar, userId } =
     useContext(AuthContext);
@@ -44,6 +47,7 @@ export default function postDetails() {
       .getAll(photoId)
       .then((result) => setComments(result))
       .catch((err) => console.log(err));
+
   }, [photoId]);
 
   const editPhotoClickHandler = () => {
@@ -96,8 +100,8 @@ export default function postDetails() {
   };
 
   const onEditPhotoHandler = async (data) => {
-    if(photo._ownerId != userId){
-      navigate(`/photo/details/${photoId}`)
+    if (photo._ownerId != userId) {
+      navigate(`/photo/details/${photoId}`);
     }
     try {
       const updateInfo = await photoApi.update(photoId, data);
@@ -111,6 +115,14 @@ export default function postDetails() {
       console.log(err);
     }
   };
+
+  const likePhotoClickHandler = async () => {
+     setLikeCount(likeCount + 1)
+     await likesApi.like(photoId,likeCount)
+     setIsLiked((current) => !current)
+     const likes = await likesApi.getLikes(photoId)
+     console.log(likes)
+    }
 
   return (
     <>
@@ -134,9 +146,12 @@ export default function postDetails() {
 
       <div className="postDetails">
         <div className="postDetailsWrapper">
-          <img className="postDetailsImg" src={photo.imageUrl} alt="" />
+          <img className="postDetailsImg" src={photo.imageUrl} alt={photo.title} />
           <h1 className="postDetailsTitle">
             {photo.title}
+            {userId && (
+              <Likes/>
+            )}
             {/** IF it's owner show edit buttons */}
             {userId && userId === photo._ownerId && (
               <div className="postDetailsEdit">

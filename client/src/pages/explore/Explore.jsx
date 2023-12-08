@@ -19,11 +19,11 @@ export default function Discover() {
   }, [query]);
 
   const onSearchHandler = async (data) => {
-    const { searchInput } = { ...data };
+    const { searchInput } = data;
     setQuery(searchInput);
   };
 
-  console.log(explorePhotos)
+
 
 
   return (
@@ -54,7 +54,7 @@ export default function Discover() {
           </div>
         )}
         {explorePhotos.length != 0 && (
-          <button className="load-more" onClick={() => setVisible((prevState) => prevState + 8)}>Load More</button>
+          <button className="load-more"  onClick={() => setVisible((prevState) => prevState + 8)}>Load More</button>
         )}
       </div>
     </>

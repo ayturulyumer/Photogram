@@ -93,7 +93,7 @@
             // NOTE: the OPTIONS method results in undefined result and also it never processes plugins - keep this in mind
             if (method == 'OPTIONS') {
                 Object.assign(headers, {
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT,PATCH, DELETE, OPTIONS',
                     'Access-Control-Allow-Credentials': false,
                     'Access-Control-Max-Age': '86400',
                     'Access-Control-Allow-Headers': 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, X-Authorization, X-Admin'
@@ -1574,8 +1574,8 @@
     		"1240549d-f0e0-497e-ab99-eb8f703713d7": {
     			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
                 title: "City",
-                description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur eligendi nihil vero a in molestias dolore est veniam provident, consequatur eius doloribus asperiores neque commodi, autem cumque. Magnam, hic.",
-                createdBy: "Ayturul",
+                description: "Lorem, ipsum dolor sit amet consectetur ",
+                createdBy: "Ayti",
                 _createdOn: "2023-11-12T17:08:13.930Z",
                 imageUrl: "https://images.pexels.com/photos/2603464/pexels-photo-2603464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                 _id: "1240549d-f0e0-497e-ab99-eb8f703713d7"
@@ -1588,6 +1588,15 @@
                 _createdOn: "2023-11-12T17:08:13.930Z",
                 imageUrl: "https://images.pexels.com/photos/2724664/pexels-photo-2724664.jpeg?auto=compress&cs=tinysrgb&w=1600",
                 _id: "bdabf5e9-23be-40a1-9f14-9117b6702a9d",
+            },
+            "2b175fbc-17b3-4102-90ed-d5603795d750":{
+                "_ownerId": "047cc0c8-e9ef-4b38-af01-642860e51074",
+                "title": "Pine Trees Under Blue Sky during Golden Hour",
+                "description": "Lorem, ipsum dolor sit amet consectetur",
+                "createdBy": "Ayti",
+                "imageUrl": "https://images.pexels.com/photos/592077/pexels-photo-592077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "_createdOn": "2023-11-12T17:08:13.930Z",
+                "_id": "2b175fbc-17b3-4102-90ed-d5603795d750"
             }
     	},
     	teams: {

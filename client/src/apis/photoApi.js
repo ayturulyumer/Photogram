@@ -24,6 +24,11 @@ export const update = async (id, data) => {
   return result;
 };
 
+export const like = async (photoId,likes ) => {
+  const result = await request.patch(`${baseUrl}/${photoId}`, likes)
+  return result
+}
+
 export const getByOwner = async (ownerId) => {
   const response = await request.get(
     `${baseUrl}?where=_ownerId%3D%22${ownerId}%22`

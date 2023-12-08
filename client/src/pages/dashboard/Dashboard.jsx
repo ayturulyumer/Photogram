@@ -60,20 +60,11 @@ const rows = transformRowsMatrix(myPhotos)
                     <p className="mb-1 h5">{myPhotos.length}</p>
                     <p className="small text-muted mb-0">Photos</p>
                   </div>
-                  <div className="px-3">
-                    <p className="mb-1 h5">100</p>
-                    <p className="small text-muted mb-0">Likes</p>
-                  </div>
                 </div>
               </div>
               <div className="card-body p-4 text-black">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <p className="lead fw-normal mb-0">Your photos</p>
-                  <p className="mb-0">
-                    <a href="#!" className="text-muted">
-                      Show all
-                    </a>
-                  </p>
                 </div>
                 {/** Create new row after every second element in array  */}
                 {rows.map(row => (
