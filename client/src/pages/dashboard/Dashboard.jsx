@@ -5,6 +5,7 @@ import * as likesApi from "../../apis/likesApi.js";
 import { Link } from "react-router-dom";
 import "./dashboard.css";
 import transformRowsMatrix from "../../utils/transformRows.js";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage.jsx";
 
 export default function Dashboard() {
   const { userAvatar, userId } = useContext(AuthContext);
@@ -49,6 +50,7 @@ export default function Dashboard() {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-lg-9 col-xl-7">
             <div className="card" key={userId}>
+            {error && <ErrorMessage message={error}/>}
               <div
                 className="rounded-top text-white d-flex flex-row"
                 style={{ backgroundColor: "#000", height: 160 }}

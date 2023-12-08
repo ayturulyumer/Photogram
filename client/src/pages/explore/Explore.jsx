@@ -3,18 +3,21 @@ import SearchBar from "../../components/searchBar/SearchBar.jsx";
 import Loader from "../../components/loader/Loader.jsx";
 import { useEffect, useState } from "react";
 import * as exploreApi from "../../apis/exploreApi.js";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage.jsx";
 
 export default function Discover() {
   const [explorePhotos, setExplorePhotos] = useState([]);
   const [visible,setVisible] = useState(8)
   const [loading, setShowLoading] = useState(false);
   const [query, setQuery] = useState("nature");
+  const [error,setError] = useState("")
   useEffect(() => {
     setShowLoading(true);
     exploreApi
       .getPhotos(query)
       .then((data) => setExplorePhotos(data.photos))
-      .catch((err) => console.log(err))
+      .catch((err) =>  setError(err),
+      setTimeout(() => setError(""), 5000))
       .finally(() => setShowLoading(false));
   }, [query]);
 
@@ -42,6 +45,7 @@ export default function Discover() {
             </div>
           </div>
         ))}
+         {error && <ErrorMessage message={error}/>}
 
         {explorePhotos.length === 0 && (
           <div className="container">
