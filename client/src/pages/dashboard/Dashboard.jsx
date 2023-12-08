@@ -8,6 +8,7 @@ import transformRowsMatrix from "../../utils/transformRows.js";
 
 export default function Dashboard() {
   const { userAvatar, userId } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   const [myPhotos, setMyPhotos] = useState([]);
   const [totalLikes, setTotalLikes] = useState(0);
@@ -15,20 +16,27 @@ export default function Dashboard() {
     photoApi
       .getByOwner(userId)
       .then((data) => setMyPhotos(data))
-      .catch((err) => console.log(err));
+      .catch(
+        (err) => setError(err),
+        setTimeout(() => setError(""), 5000)
+      );
   }, [userId]);
 
   useEffect(() => {
-   if(myPhotos) {
-    myPhotos.forEach((photo) => {
-      likesApi
-      .getPhotoLikes(photo._id)
-      .then((currentLikes) => setTotalLikes((totalLikes) => totalLikes + currentLikes))
-      .catch((err) => console.log(err))
-    })
-   }
-  },[myPhotos]);
-
+    if (myPhotos) {
+      myPhotos.forEach((photo) => {
+        likesApi
+          .getPhotoLikes(photo._id)
+          .then((currentLikes) =>
+            setTotalLikes((totalLikes) => totalLikes + currentLikes)
+          )
+          .catch(
+            (err) => setError(err),
+            setTimeout(() => setError(""), 5000)
+          );
+      });
+    }
+  }, [myPhotos]);
 
   {
     /** Create matrix with 2 elements in it */
@@ -65,11 +73,11 @@ export default function Dashboard() {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <i class="fa-solid fa-image"></i>
+                    <i className="fa-solid fa-image"></i>
                     <p className="mb-1 h5">{myPhotos.length}</p>
                   </div>
                   <div className="px-3">
-                    <i class="fa-solid fa-heart"></i>
+                    <i className="fa-solid fa-heart"></i>
                     <p className="mb-1 h5">{totalLikes}</p>
                   </div>
                 </div>
