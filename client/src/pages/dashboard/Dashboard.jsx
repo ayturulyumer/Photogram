@@ -23,13 +23,13 @@ export default function Dashboard() {
     myPhotos.forEach((photo) => {
       likesApi
       .getPhotoLikes(photo._id)
-      .then((likes) => setTotalLikes((totalLikes) => totalLikes + likes))
+      .then((currentLikes) => setTotalLikes((totalLikes) => totalLikes + currentLikes))
       .catch((err) => console.log(err))
     })
    }
   },[myPhotos]);
 
-  console.log(totalLikes)
+
   {
     /** Create matrix with 2 elements in it */
   }
@@ -65,12 +65,12 @@ export default function Dashboard() {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
+                    <i class="fa-solid fa-image"></i>
                     <p className="mb-1 h5">{myPhotos.length}</p>
-                    <p className="small text-muted mb-0">Photos</p>
                   </div>
                   <div className="px-3">
+                    <i class="fa-solid fa-heart"></i>
                     <p className="mb-1 h5">{totalLikes}</p>
-                    <p className="small text-muted mb-0">Likes</p>
                   </div>
                 </div>
               </div>
