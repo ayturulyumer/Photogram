@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     if (!registerData.username) {
       setError({ message: "Username is missing" });
       return setTimeout(() => setError(""), 5000);
-    } else if (registerData.username < 3) {
+    } else if (registerData.username.length < 3) {
       setError({ message: "Username must be at least 3 characters long" });
       return setTimeout(() => setError(""), 5000);
     }
@@ -56,7 +56,9 @@ export const AuthProvider = ({ children }) => {
     if (repeatPassword != registerData.password) {
       setError({ message: "Passwords do not match" });
       return setTimeout(() => setError(""), 5000);
-    } else if (registerData.password < 4) {
+    } 
+   
+     if (registerData.password.length < 4) {
       setError({ message: "Password must be at least 4 characters long" });
       return setTimeout(() => setError(""), 5000);
     }
