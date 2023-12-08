@@ -41,23 +41,24 @@ export const AuthProvider = ({ children }) => {
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!registerData.username) {
-      return setError({ message: "Username is missing !" });
+      setError({ message: "Username is missing" });
+      return setTimeout(() => setError(""), 5000);
     } else if (registerData.username < 3) {
-      return setError({
-        message: "Username must be at least 3 characters long",
-      });
+      setError({ message: "Username must be at least 3 characters long" });
+      return setTimeout(() => setError(""), 5000);
     }
 
     if (!validEmail.test(registerData.email)) {
-      return setError({ message: "Please enter valid email !" });
+      setError({ message: "Please enter a valid email adress" });
+      return setTimeout(() => setError(""), 5000);
     }
 
     if (repeatPassword != registerData.password) {
-      return setError({ message: "Passwords do not match !" });
+      setError({ message: "Passwords do not match" });
+      return setTimeout(() => setError(""), 5000);
     } else if (registerData.password < 4) {
-      return setError({
-        message: "Password must be at least 4 characters long",
-      });
+      setError({ message: "Password must be at least 4 characters long" });
+      return setTimeout(() => setError(""), 5000);
     }
 
     try {
