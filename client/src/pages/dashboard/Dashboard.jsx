@@ -23,7 +23,7 @@ export default function Dashboard() {
     myPhotos.forEach((photo) => {
       likesApi
       .getPhotoLikes(photo._id)
-      .then((likes) => setTotalLikes((totalLikes) => totalLikes + 1))
+      .then((likes) => setTotalLikes((totalLikes) => totalLikes + likes))
       .catch((err) => console.log(err))
     })
    }
