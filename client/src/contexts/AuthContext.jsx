@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as userApi from "../apis/usersApi.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
+
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Sets authorization
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children }) => {
       navigate("/");
     } catch (error) {
       setError(error);
+      setTimeout(() => setError(""), 5000)
     }
   };
 
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
     if (!registerData.username) {
       setError({ message: "Username is missing" });
-      return setTimeout(() => setError(""), 5000);
+      return setTimeout(() => setError("") , 5000);
     } else if (registerData.username.length < 3) {
       setError({ message: "Username must be at least 3 characters long" });
       return setTimeout(() => setError(""), 5000);
@@ -93,6 +95,7 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       setError(error);
+      setTimeout(() => setError(""), 5000)
     }
   };
   const onLogoutHandler = async () => {
@@ -138,6 +141,7 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
       setError(error);
+      setTimeout(() => setError(""), 5000)
     }
   };
 
