@@ -61,7 +61,7 @@ export default function postDetails() {
       .catch((err) => console.log(err));
   }, [photoId]);
 
-  console.log(isAlreadyLiked);
+
   const editPhotoClickHandler = () => {
     setShowEdit(true);
   };

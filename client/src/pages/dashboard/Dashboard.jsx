@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../contexts/AuthContext.jsx";
 import * as photoApi from "../../apis/photoApi.js";
+import * as likesApi from "../../apis/likesApi.js";
 import { Link } from "react-router-dom";
 import "./dashboard.css";
 import transformRowsMatrix from "../../utils/transformRows.js";
-
 
 export default function Dashboard() {
   const { userAvatar, userId } = useContext(AuthContext);
 
   const [myPhotos, setMyPhotos] = useState([]);
+  const [totalLikes, setTotalLikes] = useState(0);
   useEffect(() => {
     photoApi
       .getByOwner(userId)
@@ -17,19 +18,29 @@ export default function Dashboard() {
       .catch((err) => console.log(err));
   }, [userId]);
 
+  useEffect(() => {
+   if(myPhotos) {
+    myPhotos.forEach((photo) => {
+      likesApi
+      .getPhotoLikes(photo._id)
+      .then((likes) => setTotalLikes((totalLikes) => totalLikes + 1))
+      .catch((err) => console.log(err))
+    })
+   }
+  },[myPhotos]);
 
-
-
-{/** Create matrix with 2 elements in it */}
-const rows = transformRowsMatrix(myPhotos)
-  
+  console.log(totalLikes)
+  {
+    /** Create matrix with 2 elements in it */
+  }
+  const rows = transformRowsMatrix(myPhotos);
 
   return (
     <section className="h-100 gradient-custom-2">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-lg-9 col-xl-7">
-            <div className="card">
+            <div className="card" key={userId}>
               <div
                 className="rounded-top text-white d-flex flex-row"
                 style={{ backgroundColor: "#000", height: 160 }}
@@ -38,17 +49,14 @@ const rows = transformRowsMatrix(myPhotos)
                   className="ms-4 mt-5 d-flex flex-column"
                   style={{ width: 150, height: 150 }}
                 >
-                      <Link to={"/profile"} className="link" >
-
-                  <img
-                    src={userAvatar}
-                    alt="Generic placeholder image"
-                    className="img-fluid img-thumbnail mt-4 mb-2"
-                    style={{ width: 150, height: 150, zIndex: 1  }}
-                    
+                  <Link to={"/profile"} className="link">
+                    <img
+                      src={userAvatar}
+                      alt="Generic placeholder image"
+                      className="img-fluid img-thumbnail mt-4 mb-2"
+                      style={{ width: 150, height: 150, zIndex: 1 }}
                     />
-                    </Link>
-
+                  </Link>
                 </div>
               </div>
               <div
@@ -60,6 +68,10 @@ const rows = transformRowsMatrix(myPhotos)
                     <p className="mb-1 h5">{myPhotos.length}</p>
                     <p className="small text-muted mb-0">Photos</p>
                   </div>
+                  <div className="px-3">
+                    <p className="mb-1 h5">{totalLikes}</p>
+                    <p className="small text-muted mb-0">Likes</p>
+                  </div>
                 </div>
               </div>
               <div className="card-body p-4 text-black">
@@ -67,27 +79,27 @@ const rows = transformRowsMatrix(myPhotos)
                   <p className="lead fw-normal mb-0">Your photos</p>
                 </div>
                 {/** Create new row after every second element in array  */}
-                {rows.map(row => (
-                <div className="row g-2">
-                  {row.map(photo => (
-                  <div className="col mb-2" key={photo._id}>
-                    <Link to={`/photo/details/${photo._id}`}>
-                    <img
-                      src={photo.imageUrl}
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                      />
-                      </Link>
+                {rows.map((row) => (
+                  <div className="row g-2">
+                    {row.map((photo) => (
+                      <div className="col mb-2" key={photo._id}>
+                        <Link to={`/photo/details/${photo._id}`}>
+                          <img
+                            src={photo.imageUrl}
+                            alt="image 1"
+                            className="w-100 rounded-3"
+                          />
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                  ))}
-                </div>
                 ))}
                 {myPhotos.length === 0 && (
-                <div className="no-photos">
-                <p>Your gallery looks lonely</p>
-                <img src="https://png.pngtree.com/png-clipart/20200225/original/pngtree-sad-ghost-illustration-vector-on-white-background-png-image_5293174.jpg" />
-                </div>
-              )}
+                  <div className="no-photos">
+                    <p>Your gallery looks lonely</p>
+                    <img src="https://png.pngtree.com/png-clipart/20200225/original/pngtree-sad-ghost-illustration-vector-on-white-background-png-image_5293174.jpg" />
+                  </div>
+                )}
               </div>
             </div>
           </div>
