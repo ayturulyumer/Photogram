@@ -16,20 +16,20 @@ Photogram is Photo-Sharing Application where users can share and explore captiva
 **Server:** Softuni Practive Server (https://github.com/softuni-practice-server/softuni-practice-server)
 
 ## Features
-Home Page: The central hub where users can learn about the app's concept and navigate to other sections.
+**Home Page:** The central hub where users can learn about the app's concept and navigate to other sections.
 
-Explore Page: A curated space where both guests and registered users can discover captivating images sourced from the Pexels API.
+**Explore Page:** A curated space where both guests and registered users can discover captivating images sourced from the Pexels API.
 
-Catalog: All user added photos can be found there !
+**Catalog:** All user added photos can be found there !
 
-Dashboard: An individualized space for registered users to view their own photos and track the likes received.
+**Dashboard:** An individualized space for registered users to view their own photos and track the likes received.
 
-Profile: A customizable area where users can personalize their experience by changing profile pictures and usernames.
+**Profile:** A customizable area where users can personalize their experience by changing profile pictures and usernames.
 
 ## User Roles
-Guests: Limited access to Home, Login, and Register. They can explore the concept of the app but cannot create, edit, delete, or like photos. Guests do not have a profile or a dashboard.
+**Guests:** Limited access to Home, Login, and Register. They can explore the concept of the app but cannot create, edit, delete, or like photos. Guests do not have a profile or a dashboard.
 
-Registered Users: Full access to all features, including the ability to create, edit, delete, and like photos. They have a personalized dashboard to manage their photo collection and a profile page for customization.
+**Registered Users:** Full access to all features, including the ability to create, edit, delete, and like photos. They have a personalized dashboard to manage their photo collection and a profile page for customization.
 
 
 
