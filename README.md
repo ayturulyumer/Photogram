@@ -26,7 +26,7 @@ Dashboard: An individualized space for registered users to view their own photos
 
 Profile: A customizable area where users can personalize their experience by changing profile pictures and usernames.
 
-**User roles**
+## User Roles
 Guests: Limited access to Home, Login, and Register. They can explore the concept of the app but cannot create, edit, delete, or like photos. Guests do not have a profile or a dashboard.
 
 Registered Users: Full access to all features, including the ability to create, edit, delete, and like photos. They have a personalized dashboard to manage their photo collection and a profile page for customization.
