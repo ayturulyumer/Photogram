@@ -47,7 +47,7 @@ export default function Dashboard() {
   return (
     <section className="h-100 gradient-custom-2">
       <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="row d-flex justify-content-center align-items-center h">
           <div className="col col-lg-9 col-xl-7">
             <div className="card" key={userId}>
             {error && <ErrorMessage message={error}/>}
