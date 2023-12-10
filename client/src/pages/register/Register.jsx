@@ -1,6 +1,6 @@
 import "./register.css";
 import { useForm } from "../../hooks/useForm.js";
-import { inputValidator } from "../../hooks/inputValidator.js";
+
 import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext.jsx";
 import { useContext } from "react";
@@ -8,9 +8,10 @@ import SuccessMessageModal from "../../components/successMessageModal/successMes
 import ErrorMessage from "../../components/errorMessage/ErrorMessage.jsx";
 
 export default function Register() {
-  const { onRegisterHandler, showSuccessMessage , errorMessage } = useContext(AuthContext);
+  const { onRegisterHandler, showSuccessMessage, errorMessage } =
+    useContext(AuthContext);
 
-  const { error, input, validateInput } = inputValidator();
+
 
   const { values, changeHandler, onSubmit } = useForm(
     {
@@ -32,7 +33,7 @@ export default function Register() {
         <div className="register"></div>
         <div className="login">
           <div className="container">
-        {errorMessage && <ErrorMessage message={errorMessage}/>}
+            {errorMessage && <ErrorMessage message={errorMessage} />}
             <h1>Register your account</h1>
             <div className="login-form">
               <form className="registerForm" method="POST" onSubmit={onSubmit}>
@@ -44,11 +45,8 @@ export default function Register() {
                   name="username"
                   value={values.username}
                   onChange={changeHandler}
-                  onBlur={validateInput}
                 />
-                {error.username && (
-                  <span style={{ color: "red" }}>{error.username}</span>
-                )}
+
                 <label>Email</label>
                 <input
                   type="text"
@@ -57,11 +55,8 @@ export default function Register() {
                   name="email"
                   value={values.email}
                   onChange={changeHandler}
-                  onBlur={validateInput}
                 />
-                {error.email && (
-                  <span style={{ color: "red" }}>{error.email}</span>
-                )}
+
                 <label>Password</label>
                 <input
                   type="password"
@@ -70,11 +65,8 @@ export default function Register() {
                   name="password"
                   value={values.password}
                   onChange={changeHandler}
-                  onBlur={validateInput}
                 />
-                {error.password && (
-                  <span style={{ color: "red" }}>{error.password}</span>
-                )}
+
                 <label>Repeat Password</label>
                 <input
                   type="password"
@@ -83,11 +75,8 @@ export default function Register() {
                   name="repeatPassword"
                   value={values.repeatPassword}
                   onChange={changeHandler}
-                  onBlur={validateInput}
                 />
-                {error.repeatPassword && (
-                  <span style={{ color: "red" }}>{error.repeatPassword}</span>
-                )}
+
                 <button type="submit" className="registerButton">
                   Register
                 </button>

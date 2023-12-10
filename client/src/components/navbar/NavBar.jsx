@@ -19,11 +19,6 @@ export default function NavBar() {
             </Link>
           </li>
           <li className="navListItem">
-            <Link to="/explore" className="link">
-              EXPLORE
-            </Link>
-          </li>
-          <li className="navListItem">
             <Link to="/photos" className="link">
               PHOTOS
             </Link>
@@ -37,6 +32,11 @@ export default function NavBar() {
                   ADD PHOTO
                 </Link>
               </li>
+              <li className="navListItem">
+            <Link to="/explore" className="link">
+              EXPLORE
+            </Link>
+          </li>
             </>
           )}
           {/*If user is  not authenticated */}

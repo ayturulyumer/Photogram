@@ -12,6 +12,7 @@ import SuccessMessageModal from "../successMessageModal/successMessageModal.jsx"
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext.jsx";
+import ErrorMessage from "../errorMessage/ErrorMessage.jsx";
 import "./postDetails.css";
 
 export default function postDetails() {
@@ -23,15 +24,12 @@ export default function postDetails() {
   const [liked, setIsLiked] = useState(false);
   const [photoLikes, setPhotoLikes] = useState(0);
   const [isAlreadyLiked, setIsAlreadyLiked] = useState(0);
+  const [error, setError] = useState("");
 
   const { isAuthenticated, username, userAvatar, userId } =
     useContext(AuthContext);
 
-  {
-    /** Another way to get photoId */
-  }
-  // const location = useLocation()
-  // const photoId = location.pathname.split("/")[3]
+
 
   const { photoId } = useParams();
   const navigate = useNavigate();
@@ -43,24 +41,35 @@ export default function postDetails() {
     photoApi
       .getSingle(photoId)
       .then((result) => setPhoto(result))
-      .catch((err) => console.log(err));
+      .catch(
+        (err) => setError(err),
+        setTimeout(() => setError(""), 5000)
+      );
 
     commentsApi
       .getAll(photoId)
       .then((result) => setComments(result))
-      .catch((err) => console.log(err));
+      .catch(
+        (err) => setError(err),
+        setTimeout(() => setError(""), 5000)
+      );
 
     likesApi
       .getPhotoLikes(photoId)
       .then((result) => setPhotoLikes(result))
-      .catch((err) => console.log(err));
+      .catch(
+        (err) => setError(err),
+        setTimeout(() => setError(""), 5000)
+      );
 
     likesApi
       .getIsAlreadyLiked(photoId, userId)
       .then((result) => setIsAlreadyLiked(result))
-      .catch((err) => console.log(err));
+      .catch(
+        (err) => setError(err),
+        setTimeout(() => setError(""), 5000)
+      );
   }, [photoId]);
-
 
   const editPhotoClickHandler = () => {
     setShowEdit(true);
@@ -73,6 +82,47 @@ export default function postDetails() {
   const onClose = () => {
     setShowDelete(false);
     setShowEdit(false);
+  };
+  const onEditPhotoHandler = async (data) => {
+    const validImageUrl = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    if (!data.title) {
+      setError({ message: "Title is missing!" });
+      return setTimeout(() => setError(""), 5000);
+    } else if (data.title.length < 4) {
+      setError({ message: "Title must be at least 4 characters long!" });
+      return setTimeout(() => setError(""), 5000);
+    }
+
+    if (!data.description) {
+      setError({ message: "Description is missing!" });
+      return setTimeout(() => setError(""), 5000);
+    } else if (data.description.length < 10) {
+      setError({ message: "Description must be at least 10 characters long!" });
+      return setTimeout(() => setError(""), 5000);
+    }
+
+    if (!data.imageUrl) {
+      setError({ message: "Image Url is missing!" });
+      return setTimeout(() => setError(""), 5000);
+    } else if (!validImageUrl.test(data.imageUrl)) {
+      setError({ message: "Invalid image url" });
+      return setTimeout(() => setError(""), 5000);
+    }
+    
+    if (photo._ownerId != userId) {
+      navigate(`/photo/details/${photoId}`);
+    }
+    try {
+      const updateInfo = await photoApi.update(photoId, data);
+      const updatedPhoto = {
+        createdBy: photo.createdBy,
+        ...updateInfo,
+      };
+      setPhoto(updatedPhoto);
+      setShowEdit(false);
+    } catch (err) {
+      setError(err), setTimeout(() => setError(""), 5000);
+    }
   };
 
   const onDeletePhotoHandler = async () => {
@@ -94,43 +144,34 @@ export default function postDetails() {
       }
       setTimeout(() => navigate("/photos"), 1500);
     } catch (err) {
-      {
-        /** TODO ! Add proper error message */
-      }
-      console.log(err);
+      setError(err), setTimeout(() => setError(""), 5000);
     }
   };
 
   const onCommentSubmit = async ({ text }) => {
-    const newComment = await commentsApi.create(
-      photoId,
-      text,
-      username,
-      userAvatar
-    );
-    setComments((state) => [newComment, ...state]);
-  };
-
-  const onEditPhotoHandler = async (data) => {
-    if (photo._ownerId != userId) {
-      navigate(`/photo/details/${photoId}`);
+    if (!text) {
+      setError({ message: "Cannot send empty message !" });
+      return setTimeout(() => setError(""), 5000);
     }
     try {
-      const updateInfo = await photoApi.update(photoId, data);
-      const updatedPhoto = {
-        createdBy: photo.createdBy,
-        ...updateInfo,
-      };
-      setPhoto(updatedPhoto);
-      setShowEdit(false);
+      const newComment = await commentsApi.create(
+        photoId,
+        text,
+        username,
+        userAvatar
+      );
+      setComments((state) => [newComment, ...state]);
     } catch (err) {
-      console.log(err);
+      setError(err), setTimeout(() => setError(""), 5000);
     }
   };
+
+ 
 
   const photoLikeHandler = async () => {
     if (isAlreadyLiked) {
-      alert("YOU LIKED IT BROO");
+      setError({ message: "It's already liked" });
+      setTimeout(() => setError(""), 5000);
       return;
     }
     try {
@@ -139,7 +180,7 @@ export default function postDetails() {
       setIsAlreadyLiked(1);
       setIsLiked((current) => !current);
     } catch (err) {
-      console.log(err);
+      setError(err), setTimeout(() => setError(""), 5000);
     }
   };
 
@@ -150,6 +191,7 @@ export default function postDetails() {
           onClose={onClose}
           photoDetails={photo}
           onEdit={onEditPhotoHandler}
+          error={error}
         />
       )}
 
@@ -204,7 +246,11 @@ export default function postDetails() {
           </div>
           <p className="postDetailsDescription">{photo.description}</p>
         </div>
+        <div className="err">
+          {error && <ErrorMessage message={error.message} />}
+        </div>
         {/** Comment section */}
+
         <Comment
           isAuthenticated={isAuthenticated}
           userAvatar={userAvatar}

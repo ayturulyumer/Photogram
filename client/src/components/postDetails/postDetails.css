@@ -67,14 +67,14 @@
   border: none;
 }
 
-
 body {
   background: #000000;
 }
-
 
 span {
   cursor: auto;
 }
 
-
+.err {
+margin-left: 750px;
+}

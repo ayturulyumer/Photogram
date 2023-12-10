@@ -12,9 +12,9 @@ const buildOptions = (data) => {
   let token = localStorage.getItem("accessToken");
 
 
-  // if it's any otherp age i will have auth token with accessToken inside 
+
   if (token == null) {
-    token = JSON.parse(localStorage.getItem("auth")).accessToken;
+    token = JSON.parse(localStorage.getItem("auth"))?.accessToken;
   }
 
   if (token != null) {

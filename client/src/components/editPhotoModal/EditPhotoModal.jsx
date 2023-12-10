@@ -5,6 +5,8 @@ import { useContext } from "react";
 
 export default function EditPhotoModal({ onClose, photoDetails, onEdit }) {
   const {username} = useContext(AuthContext)
+
+
   const { values, changeHandler, onSubmit } = useForm(
     {
       createdBy: username,

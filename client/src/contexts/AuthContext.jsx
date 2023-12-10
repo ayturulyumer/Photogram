@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import * as userApi from "../apis/usersApi.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
-
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Sets authorization
@@ -12,8 +11,6 @@ export const AuthProvider = ({ children }) => {
   const [showSuccessMessage, setSuccessMessage] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-
 
   const onLoginHandler = async (data) => {
     try {
@@ -33,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       navigate("/");
     } catch (error) {
       setError(error);
-      setTimeout(() => setError(""), 5000)
+      setTimeout(() => setError(""), 5000);
     }
   };
 
@@ -44,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
     if (!registerData.username) {
       setError({ message: "Username is missing" });
-      return setTimeout(() => setError("") , 5000);
+      return setTimeout(() => setError(""), 5000);
     } else if (registerData.username.length < 3) {
       setError({ message: "Username must be at least 3 characters long" });
       return setTimeout(() => setError(""), 5000);
@@ -58,16 +55,16 @@ export const AuthProvider = ({ children }) => {
     if (repeatPassword != registerData.password) {
       setError({ message: "Passwords do not match" });
       return setTimeout(() => setError(""), 5000);
-    } 
-   
-     if (registerData.password.length < 4) {
+    }
+
+    if (registerData.password.length < 4) {
       setError({ message: "Password must be at least 4 characters long" });
       return setTimeout(() => setError(""), 5000);
     }
 
     try {
       {
-        /** Register the user in server  */
+        /** Register the user in server // we don't need token */
       }
       const userInitialInfo = await userApi.register(registerData);
       {
@@ -81,12 +78,11 @@ export const AuthProvider = ({ children }) => {
       }
       const user = await userApi.createProfile(userInitialInfo);
 
+      setAuth(user);
       {
         /** Remove the accessToken from localStorage as we don't need it anymore  */
       }
       localStorage.removeItem("accessToken");
-
-      setAuth(user);
 
       setSuccessMessage(true);
 
@@ -95,9 +91,10 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       setError(error);
-      setTimeout(() => setError(""), 5000)
+      setTimeout(() => setError(""), 5000);
     }
   };
+
   const onLogoutHandler = async () => {
     setAuth({});
   };
@@ -112,8 +109,7 @@ export const AuthProvider = ({ children }) => {
       return setTimeout(() => setError(""), 5000);
     } else if (!validAvatar.test(newAvatar)) {
       setError({
-        message:
-          "Please enter a valid HTTP or HTTPS image URL",
+        message: "Please enter a valid HTTP or HTTPS image URL",
       });
       return setTimeout(() => setError(""), 5000);
     }
@@ -141,7 +137,7 @@ export const AuthProvider = ({ children }) => {
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
       setError(error);
-      setTimeout(() => setError(""), 5000)
+      setTimeout(() => setError(""), 5000);
     }
   };
 

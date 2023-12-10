@@ -27,7 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/photos" element={<Photos />} />
-            <Route path="/explore" element={<Explore />} />
+           
 
             <Route element={<LoggedUserGuard />}>
               <Route path="/register" element={<Register />} />
@@ -41,6 +41,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/explore" element={<Explore />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
