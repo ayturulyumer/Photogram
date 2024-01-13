@@ -7,17 +7,24 @@ import ErrorMessage from "../../components/errorMessage/ErrorMessage.jsx";
 
 export default function Discover() {
   const [explorePhotos, setExplorePhotos] = useState([]);
-  const [visible,setVisible] = useState(8)
+  const [nextPage, setNextPage] = useState(null);
   const [loading, setShowLoading] = useState(false);
   const [query, setQuery] = useState("nature");
-  const [error,setError] = useState("")
+  const [error, setError] = useState("");
   useEffect(() => {
     setShowLoading(true);
     exploreApi
       .getPhotos(query)
-      .then((data) => setExplorePhotos(data.photos))
-      .catch((err) =>  setError(err),
-      setTimeout(() => setError(""), 5000))
+      .then((data) => {
+        setExplorePhotos(data.photos);
+
+        setNextPage(data.next_page);
+
+      })
+      .catch(
+        (err) => setError(err),
+        setTimeout(() => setError(""), 5000)
+      )
       .finally(() => setShowLoading(false));
   }, [query]);
 
@@ -27,7 +34,22 @@ export default function Discover() {
   };
 
 
+  const onLoadMoreHandler = async (url) => {
+    if (nextPage) {
+      setShowLoading(true);
 
+      try {
+        const nextPageData = await exploreApi.loadMore(nextPage);
+        setExplorePhotos((prevPhotos) => [...prevPhotos, ...nextPageData.photos]);
+        setNextPage(nextPageData.next_page);
+      } catch (err) {
+        setError(err.message);
+        setTimeout(() => setError(''), 5000);
+      } finally {
+        setShowLoading(false);
+      }
+    }
+  };
 
   return (
     <>
@@ -35,7 +57,7 @@ export default function Discover() {
       <div className="explore-posts">
         {loading && <Loader />}
 
-        {explorePhotos.slice(0,visible).map((photo) => (
+        {explorePhotos.map((photo) => (
           <div className="Post" key={photo.id}>
             <img className="PostImg" src={photo.src.original} alt={photo.alt} />
             <div className="PostInfo">
@@ -45,20 +67,24 @@ export default function Discover() {
             </div>
           </div>
         ))}
-         {error && <ErrorMessage message={error}/>}
+        {error && <ErrorMessage message={error} />}
 
         {explorePhotos.length === 0 && (
           <div className="container">
             <div className="icon">😞</div>
             <h1>No Matches Found</h1>
             <p>Sorry, we couldn't find any matches for your search.</p>
-            <p>
-              Try adjusting your search criteria
-            </p>
+            <p>Try adjusting your search criteria</p>
           </div>
         )}
         {explorePhotos.length != 0 && (
-          <button className="load-more"  onClick={() => setVisible((prevState) => prevState + 8)}>Load More</button>
+          <button
+            className="load-more"
+            onClick={onLoadMoreHandler}
+            disabled={!nextPage || loading}
+          >
+            Load More
+          </button>
         )}
       </div>
     </>
