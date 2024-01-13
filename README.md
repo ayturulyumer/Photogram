@@ -9,7 +9,10 @@ Photogram is Photo-Sharing Application where users can share and explore captiva
 - Navigate to `cd .\client` and start the client `npm run dev`
 - Open the app through ` ➜  Local:   http://127.0.0.1:5173/ `
 
+**or**
+- https://photogram-9797.firebaseapp.com/
 
+  
 ## Tech Stack used
 
 **Client:** React, Bootstrap, HTML , CSS
