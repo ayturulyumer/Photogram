@@ -29,8 +29,6 @@ export default function postDetails() {
   const { isAuthenticated, username, userAvatar, userId } =
     useContext(AuthContext);
 
-
-
   const { photoId } = useParams();
   const navigate = useNavigate();
 
@@ -108,7 +106,7 @@ export default function postDetails() {
       setError({ message: "Invalid image url" });
       return setTimeout(() => setError(""), 5000);
     }
-    
+
     if (photo._ownerId != userId) {
       navigate(`/photo/details/${photoId}`);
     }
@@ -130,7 +128,7 @@ export default function postDetails() {
       /** If current user is not owner */
     }
     if (photo._ownerId != userId) {
-      navigate(`/photo/details/${photoId}`);
+      return navigate(`/photo/details/${photoId}`);
     }
     try {
       await photoApi.remove(photoId);
@@ -166,13 +164,10 @@ export default function postDetails() {
     }
   };
 
- 
-
   const photoLikeHandler = async () => {
     if (isAlreadyLiked) {
       setError({ message: "It's already liked" });
-      setTimeout(() => setError(""), 5000);
-      return;
+      return setTimeout(() => setError(""), 5000);
     }
     try {
       await likesApi.like(photoId);
