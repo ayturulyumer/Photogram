@@ -1,22 +1,12 @@
-import { createClient } from "pexels";
-import * as request from "../lib/request.js";
-const pexelsKey = import.meta.env.VITE_APP_PEXELS_KEY;
+import { createClient } from 'pexels';
+
+const client = createClient('WXxy0Xfe6x6OulNE3yvVYpeuYLAPtgCBIxQoG2aIQ9xnzqjltEKXdXqn');
 
 
-const client = createClient(pexelsKey);
+
+
 
 export const getPhotos = async (query) => {
-  const result = await client.photos.search({ query, per_page: 8, page: 1 });
-  return result;
-};
-
-// I'm not using my request util because i get CORS Blocked by backend i guess
-export const loadMore = async (url) => {
-  const response = await fetch(url, {
-    headers: {
-      Authorization: pexelsKey,
-    },
-  });
-  const result = await response.json()
-  return result
-};
+   const result = await client.photos.search({ query, per_page:32, });
+   return result
+}
