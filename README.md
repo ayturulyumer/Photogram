@@ -2,15 +2,15 @@
 
 Photogram is Photo-Sharing Application where users can share and explore captivating images.
 
-**How to run locally**
+**You can visit: https://photogram-9797.firebaseapp.com/**
+**or**
+**run locally**
 - Clone repo https://github.com/ajummer/Photogram.git
 - Install dependencies
 - Navigate to `cd .\server` and start the server `node server.js`
 - Navigate to `cd .\client` and start the client `npm run dev`
 - Open the app through ` ➜  Local:   http://127.0.0.1:5173/ `
 
-**or**
-- https://photogram-9797.firebaseapp.com/
 
   
 ## Tech Stack used
