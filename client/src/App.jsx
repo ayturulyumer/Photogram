@@ -27,7 +27,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/photos" element={<Photos />} />
-           
 
             <Route element={<LoggedUserGuard />}>
               <Route path="/register" element={<Register />} />
