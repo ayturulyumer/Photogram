@@ -1,10 +1,10 @@
-import "./main.css";
+import styles from "./main.module.css";
 
 export default function Main() {
   return (
-    <div className="main">
-      <h1 className="mainTitleLarge">About us</h1>
-      <span className="mainTitleSmall">
+    <div className={styles.main}>
+      <h1 className={styles.mainTitleLarge}>About us</h1>
+      <span className={styles.mainTitleSmall}>
         At Photogram, we are passionate about photography and dedicated to
         creating a vibrant online community where individuals from all walks of
         life can come together to share their love for capturing moments. Our
@@ -16,7 +16,7 @@ export default function Main() {
         strive to foster creativity, encourage learning, and celebrate the power
         of visual storytelling.
       </span>
-      <div className="mainImg"></div>
+      <div className={styles.mainImg}></div>
     </div>
   );
 }
